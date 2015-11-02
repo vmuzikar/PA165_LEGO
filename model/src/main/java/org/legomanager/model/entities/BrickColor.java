@@ -10,6 +10,7 @@ import java.util.Set;
 
 /**
  * Representation of a color of a single LEGO brick
+ * TODO: [?] Many-to-many not empty constraint [?]
  *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
