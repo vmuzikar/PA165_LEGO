@@ -20,16 +20,16 @@ public class KitDaoImpl implements KitDao {
         return em.find(Kit.class, id);
     }
 
-    public void create(Kit color) {
-        em.persist(color);
+    public void create(Kit kit) {
+        em.persist(kit);
     }
 
-    public void delete(Kit color) {
-        em.remove(color);
+    public void delete(Kit kit) {
+        em.remove(em.merge(kit));
     }
 
-    public void update(Kit color) {
-        em.merge(color);
+    public void update(Kit kit) {
+        em.merge(kit);
     }
 
     public List<Kit> findAll() {

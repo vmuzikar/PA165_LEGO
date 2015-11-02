@@ -25,7 +25,7 @@ public class BrickColorDaoImpl implements BrickColorDao {
     }
 
     public void delete(BrickColor color) {
-        em.remove(color);
+        em.remove(em.merge(color));
     }
 
     public void update(BrickColor color) {

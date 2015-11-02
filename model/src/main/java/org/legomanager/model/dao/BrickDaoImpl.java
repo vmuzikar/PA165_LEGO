@@ -20,16 +20,16 @@ public class BrickDaoImpl implements BrickDao {
         return em.find(Brick.class, id);
     }
 
-    public void create(Brick color) {
-        em.persist(color);
+    public void create(Brick brick) {
+        em.persist(brick);
     }
 
-    public void delete(Brick color) {
-        em.remove(color);
+    public void delete(Brick brick) {
+        em.remove(em.merge(brick));
     }
 
-    public void update(Brick color) {
-        em.merge(color);
+    public void update(Brick brick) {
+        em.merge(brick);
     }
 
     public List<Brick> findAll() {
