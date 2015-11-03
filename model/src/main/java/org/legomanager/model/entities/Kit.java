@@ -24,7 +24,7 @@ public class Kit {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     private Category category;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
