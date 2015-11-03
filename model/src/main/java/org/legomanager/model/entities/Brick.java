@@ -51,10 +51,22 @@ public class Brick {
         color.addBrick(this);
     }
 
+    public Set<Kit> getKits() {
+        return Collections.unmodifiableSet(kits);
+    }
+
+    public void addKit(Kit kit) {
+        kits.add(kit);
+    }
+
     @Override
     public boolean equals(Object o) {
-        return this == o
-                || (o instanceof Brick && ((Brick) o).getName().equals(getName()));
+        if (this == o) {return true;}
+        if (!(o instanceof Brick)) {return false;}
+
+        Brick brick = (Brick) o;
+
+        return brick.getName() != null && getName() != null && brick.getName().equals(getName());
     }
 
     @Override

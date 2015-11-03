@@ -54,8 +54,12 @@ public class BrickColor {
 
     @Override
     public boolean equals(Object o) {
-        return this == o
-                || (o instanceof BrickColor && ((BrickColor) o).getColor().equals(getColor()));
+        if (this == o) {return true;}
+        if (!(o instanceof BrickColor)) {return false;}
+
+        BrickColor color = (BrickColor) o;
+
+        return color.getColor() != null && getColor() != null && color.getColor().equals(getColor());
     }
 
     @Override

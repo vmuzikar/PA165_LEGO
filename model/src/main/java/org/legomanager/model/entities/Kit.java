@@ -10,7 +10,6 @@ import java.util.Set;
  * Representation of a kit
  * TODO: [?] Many-to-many not empty constraint [?]
  * TODO: [?] Bricks counts [?]
- * TODO: Uncomment currency
  *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
@@ -23,8 +22,8 @@ public class Kit {
     @Column(nullable = false, unique = true)
     private String name;
 
-//    @ManyToOne(optional = false)
-//    private Category category;
+    @ManyToOne(optional = false)
+    private Category category;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Brick> bricks = new HashSet<Brick>();
@@ -37,6 +36,9 @@ public class Kit {
 
     @Column(nullable = false)
     private short maxAge;
+
+    @ManyToMany(mappedBy = "kits")
+    private Set<org.legomanager.model.entities.Set> sets = new HashSet<org.legomanager.model.entities.Set>();
 
     public long getId() {
         return id;
@@ -54,14 +56,14 @@ public class Kit {
         this.name = name;
     }
 
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//        category.addKit(this);
-//    }
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+        category.addKit(this);
+    }
 
     public Set<Brick> getBricks() {
         return Collections.unmodifiableSet(bricks);
@@ -69,6 +71,7 @@ public class Kit {
 
     public void addBrick(Brick brick) {
         bricks.add(brick);
+        brick.addKit(this);
     }
 
     public void setBricks(Set<Brick> bricks) {
@@ -97,5 +100,29 @@ public class Kit {
 
     public void setMaxAge(short maxAge) {
         this.maxAge = maxAge;
+    }
+
+    public Set<org.legomanager.model.entities.Set> getSets() {
+        return Collections.unmodifiableSet(sets);
+    }
+
+    public void addSet(org.legomanager.model.entities.Set set) {
+        sets.add(set);
+        set.addKit(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {return true;}
+        if (!(o instanceof Kit)) {return false;}
+
+        Kit kit = (Kit) o;
+
+        return kit.getName() != null && getName() != null && kit.getName().equals(getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName() != null ? getName().hashCode() : 0;
     }
 }

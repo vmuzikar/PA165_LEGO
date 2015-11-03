@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface KitDao {
     Kit findById(long id);
-    void create(Kit color);
-    void delete(Kit color);
-    void update(Kit color);
+    void create(Kit kit);
+    void delete(Kit kit);
+    void update(Kit kit);
     List<Kit> findAll();
 }
