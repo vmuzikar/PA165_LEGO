@@ -17,10 +17,10 @@ public class BrickTest extends AbstractTest {
     @Test
     public void CRUDTest() {
 
+        BrickColor bc = createBrickColor();
+        
         Brick b1 = createBrick();
-        b1.addColor(createBrickColor());
-        b1.addColor(createBrickColor());
-        b1.addColor(createBrickColor());
+        b1.addColor(bc);
 
         // Create
         brickDao.create(b1);
@@ -32,28 +32,18 @@ public class BrickTest extends AbstractTest {
         assertEquals(b2.getColors(), b1.getColors());
         
         // Find all
-        b2 = createBrick();
-        b2.addColor(createBrickColor());
-        brickDao.create(b2);
-        assertEquals(brickDao.findAll().size(), 2);
+        assertEquals(brickDao.findAll().size(), 1);
 
-        /*
         // Update
-        Brick b3 = b2;
         b2.setName("updated");
         brickDao.update(b2);
-        Brick b4 = brickDao.findById(b2.getId());
-        assertNotNull(b4);
-        assertEquals(b4.getName(), b2.getName());
-        assertNotEquals(b4.getName(), b3.getName());
+        Brick b3 = brickDao.findById(b2.getId());
+        assertNotNull(b3);
+        assertEquals(b3.getName(), b2.getName());
 
         // Delete
-        brickDao.delete(b4);
-        assertNull(brickDao.findById(b4.getId()));
-        assertEquals(brickDao.findAll().size(), 1);
-        brickDao.delete(b1);
-        assertNull(brickDao.findById(b1.getId()));
+        brickDao.delete(b3);
+        assertNull(brickDao.findById(b3.getId()));
         assertEquals(brickDao.findAll().size(), 0);
-                */
     }
 }
