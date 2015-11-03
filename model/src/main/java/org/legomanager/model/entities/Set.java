@@ -60,10 +60,6 @@ public class Set implements Serializable {
         return Collections.unmodifiableSet(categories);
     }
 
-    public void setCategories(java.util.Set<Category> categories) {
-        this.categories = categories;
-    }
-
     public void addCategory(Category category) {
         this.categories.add(category);
         category.addSet(this);
@@ -71,10 +67,6 @@ public class Set implements Serializable {
 
     public java.util.Set<Kit> getKits() {
         return Collections.unmodifiableSet(kits);
-    }
-
-    public void setKits(java.util.Set<Kit> kits) {
-        this.kits = kits;
     }
 
     public void addKit(Kit kit) {

@@ -45,20 +45,12 @@ public class Category implements Serializable {
         return Collections.unmodifiableSet(sets);
     }
 
-    public void setSets(java.util.Set<Set> sets) {
-        this.sets = sets;
-    }
-
     public void addSet(Set set) {
         this.sets.add(set);
     }
 
     public java.util.Set<Kit> getKits() {
         return Collections.unmodifiableSet(kits);
-    }
-
-    public void setKits(java.util.Set<Kit> kits) {
-        this.kits = kits;
     }
 
     public void addKit(Kit kit) {
