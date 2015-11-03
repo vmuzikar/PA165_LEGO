@@ -37,8 +37,8 @@ public class SetTest extends AbstractTest {
         assertEquals(set2.getKits(), set1.getKits());
         assertEquals(set2.getPrice(), set1.getPrice());
         assertEquals(set2.getCurrency(), set1.getCurrency());
-        assertEquals(set2.getMinAge(), kit1.getMinAge()); // Age range should be set by kits
-        assertEquals(set2.getMaxAge(), kit2.getMaxAge());
+        assertEquals(set2.getMinAge(), set1.getMinAge());
+        assertEquals(set2.getMaxAge(), set1.getMaxAge());
         assertEquals(setDao.findAll().size(), 1);
 
         // Update

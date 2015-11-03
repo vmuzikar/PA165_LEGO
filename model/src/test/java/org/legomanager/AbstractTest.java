@@ -43,6 +43,8 @@ public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
         set.setName("Some set");
         set.setCurrency(Currency.getInstance("CZK"));
         set.setPrice(new BigDecimal("2459.99"));
+        set.setMinAge((short) 3);
+        set.setMaxAge((short) 12);
         return set;
     }
 
