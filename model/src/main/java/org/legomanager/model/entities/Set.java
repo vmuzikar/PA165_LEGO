@@ -116,11 +116,18 @@ public class Set implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return this == o || (o instanceof Set && ((Set) o).getName().equals(this.getName()));
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Set)) {
+            return false;
+        }
+        Set s = (Set) o;
+        return (s.getName() != null && this.getName() != null && this.getName().equals(s.getName()));
     }
 
     @Override
     public int hashCode() {
-        return this.getName() != null ? this.getName().hashCode() : 0;
+        return (this.getName() != null ? this.getName().hashCode() : 0);
     }
 }
