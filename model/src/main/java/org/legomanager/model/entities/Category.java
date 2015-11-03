@@ -67,11 +67,18 @@ public class Category implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return this == o || (o instanceof Category && ((Category) o).getName().equals(this.getName()));
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Category)) {
+            return false;
+        }
+        Category c = (Category) o;
+        return (c.getName() != null && this.getName() != null && this.getName().equals(c.getName()));
     }
 
     @Override
     public int hashCode() {
-        return this.getName() != null ? this.getName().hashCode() : 0;
+        return (this.getName() != null ? this.getName().hashCode() : 0);
     }
 }
