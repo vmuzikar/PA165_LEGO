@@ -1,5 +1,6 @@
 package org.legomanager.model.entities;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
@@ -26,7 +27,10 @@ public class Set implements Serializable {
     
     @ManyToMany(cascade = CascadeType.PERSIST)
     private java.util.Set<Kit> kits = new HashSet<Kit>();
-    
+
+    @Column(nullable = false)
+    private BigDecimal price;
+
     @Column(nullable = false)
     private Currency currency;
 
@@ -77,7 +81,15 @@ public class Set implements Serializable {
         this.kits.add(kit);
         kit.addSet(this);
     }
-    
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Currency getCurrency() {
         return currency;
     }

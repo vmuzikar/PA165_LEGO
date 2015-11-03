@@ -49,7 +49,6 @@ public class BrickColor {
 
     public void addBrick(Brick brick) {
         bricks.add(brick);
-        brick.addColor(this);
     }
 
     @Override

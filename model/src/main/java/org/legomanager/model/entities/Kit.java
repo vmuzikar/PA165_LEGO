@@ -1,6 +1,7 @@
 package org.legomanager.model.entities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
  * Representation of a kit
  * TODO: [?] Many-to-many not empty constraint [?]
  * TODO: [?] Bricks counts [?]
+ * TODO: [?] Price constrains [?]
  *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
@@ -27,6 +29,9 @@ public class Kit {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Brick> bricks = new HashSet<Brick>();
+
+    @Column(nullable = false)
+    private BigDecimal price;
 
     @Column(nullable = false)
     private Currency currency;
@@ -74,8 +79,12 @@ public class Kit {
         brick.addKit(this);
     }
 
-    public void setBricks(Set<Brick> bricks) {
-        this.bricks = bricks;
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Currency getCurrency() {
@@ -108,7 +117,6 @@ public class Kit {
 
     public void addSet(org.legomanager.model.entities.Set set) {
         sets.add(set);
-        set.addKit(this);
     }
 
     @Override
