@@ -32,6 +32,7 @@ public class BrickTest extends AbstractTest {
         assertEquals(b2.getColors(), b1.getColors());
         
         // Find all
+        b2 = createBrick();
         b2.addColor(createBrickColor());
         brickDao.create(b2);
         assertEquals(brickDao.findAll().size(), 2);
