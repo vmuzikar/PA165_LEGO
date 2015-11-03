@@ -17,6 +17,7 @@ public class SetTest extends AbstractTest {
     @Test
     public void CRUDTest() {
         Category category = createCategory();
+        category.setName("Categ2");
         Kit kit1 = createKit(category);
         kit1.setMinAge((short) 1);
 
