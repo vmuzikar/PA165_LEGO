@@ -33,7 +33,6 @@ public class KitTest extends AbstractTest {
         assertEquals(k2.getCurrency(), k1.getCurrency());
         assertEquals(k2.getMaxAge(), k1.getMaxAge());
         assertEquals(k2.getMinAge(), k1.getMinAge());
-        assertEquals(k2.getSets(), k1.getSets());
         
         // Find all
         assertEquals(kitDao.findAll().size(), 1);

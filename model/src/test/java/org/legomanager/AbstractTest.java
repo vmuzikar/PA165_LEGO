@@ -15,12 +15,7 @@ import java.util.Currency;
  */
 @ContextConfiguration("classpath:META-INF/spring-config.xml")
 public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
-    protected BrickColor createBrickColor() {
-        BrickColor color = new BrickColor();
-        color.setColor(Color.RED);
-        return color;
-    }
-
+    
     protected Brick createBrick() {
         Brick brick = new Brick();
         brick.setName("Some brick");
@@ -36,16 +31,6 @@ public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
         kit.setMaxAge((short) 12);
         kit.setCategory(category);
         return kit;
-    }
-
-    protected Set createSet() {
-        Set set = new Set();
-        set.setName("Some set");
-        set.setCurrency(Currency.getInstance("CZK"));
-        set.setPrice(new BigDecimal("2459.99"));
-        set.setMinAge((short) 3);
-        set.setMaxAge((short) 12);
-        return set;
     }
 
     protected Category createCategory() {

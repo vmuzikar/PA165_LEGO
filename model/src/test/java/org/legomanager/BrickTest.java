@@ -16,11 +16,8 @@ public class BrickTest extends AbstractTest {
 
     @Test
     public void CRUDTest() {
-
-        BrickColor bc = createBrickColor();
         
         Brick b1 = createBrick();
-        b1.addColor(bc);
 
         // Create
         brickDao.create(b1);
@@ -29,7 +26,6 @@ public class BrickTest extends AbstractTest {
         Brick b2 = brickDao.findById(b1.getId());
         assertNotNull(b2);
         assertEquals(b2.getName(), b1.getName());
-        assertEquals(b2.getColors(), b1.getColors());
         
         // Find all
         assertEquals(brickDao.findAll().size(), 1);

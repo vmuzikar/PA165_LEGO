@@ -18,9 +18,6 @@ public class Category implements Serializable {
 
     @Column(nullable = false, unique = true)
     private String name;
-
-    @ManyToMany(mappedBy = "categories")
-    private java.util.Set<Set> sets = new HashSet<Set>();
     
     @OneToMany(mappedBy = "category")
     private java.util.Set<Kit> kits = new HashSet<Kit>();
@@ -39,14 +36,6 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public java.util.Set<Set> getSets() {
-        return Collections.unmodifiableSet(sets);
-    }
-
-    public void addSet(Set set) {
-        this.sets.add(set);
     }
 
     public java.util.Set<Kit> getKits() {

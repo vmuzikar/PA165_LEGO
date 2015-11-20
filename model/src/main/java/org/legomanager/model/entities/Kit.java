@@ -41,10 +41,7 @@ public class Kit {
 
     @Column(nullable = false)
     private short maxAge;
-
-    @ManyToMany(mappedBy = "kits")
-    private Set<org.legomanager.model.entities.Set> sets = new HashSet<org.legomanager.model.entities.Set>();
-
+    
     public long getId() {
         return id;
     }
@@ -109,14 +106,6 @@ public class Kit {
 
     public void setMaxAge(short maxAge) {
         this.maxAge = maxAge;
-    }
-
-    public Set<org.legomanager.model.entities.Set> getSets() {
-        return Collections.unmodifiableSet(sets);
-    }
-
-    public void addSet(org.legomanager.model.entities.Set set) {
-        sets.add(set);
     }
 
     @Override

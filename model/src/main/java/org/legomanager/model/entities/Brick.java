@@ -20,9 +20,6 @@ public class Brick {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private Set<BrickColor> colors = new HashSet<BrickColor>();
-
     @ManyToMany(mappedBy = "bricks")
     private Set<Kit> kits = new HashSet<Kit>();
 
@@ -40,15 +37,6 @@ public class Brick {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<BrickColor> getColors() {
-        return Collections.unmodifiableSet(colors);
-    }
-
-    public void addColor(BrickColor color) {
-        colors.add(color);
-        color.addBrick(this);
     }
 
     public Set<Kit> getKits() {
