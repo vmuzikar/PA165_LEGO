@@ -7,10 +7,6 @@ import java.util.List;
 /**
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
-public interface KitDao {
-    Kit findById(long id);
-    void create(Kit kit);
-    void delete(Kit kit);
-    void update(Kit kit);
-    List<Kit> findAll();
+public interface KitDao extends AbstractBaseDao<Kit> {
+    List<Kit> getKitsWithAgeRange(short ageFrom, short ageTo);
 }
