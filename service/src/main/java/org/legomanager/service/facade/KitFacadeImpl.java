@@ -1,9 +1,12 @@
 package org.legomanager.service.facade;
 
 import org.legomanager.api.dto.KitDto;
+import org.legomanager.api.representantions.ModelRepresentation;
+import org.legomanager.persistence.entities.Brick;
 import org.legomanager.persistence.entities.Kit;
 import org.legomanager.service.services.BeanMappingService;
 import org.legomanager.service.services.KitService;
+import org.legomanager.service.services.ModelKitConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,9 @@ public class KitFacadeImpl implements org.legomanager.api.facade.KitFacade {
 
     @Autowired
     BeanMappingService mappingService;
+
+    @Autowired
+    ModelKitConverterService modelKitConverterService;
 
     public void createKit(KitDto kitDto) {
         Kit kit = mappingService.map(kitDto, Kit.class);
@@ -48,5 +54,16 @@ public class KitFacadeImpl implements org.legomanager.api.facade.KitFacade {
 
     public List<KitDto> getKitsForAdults() {
         return (List<KitDto>) mappingService.map(kitService.getKitsForAdults(), KitDto.class);
+    }
+
+    public void importModel(ModelRepresentation model, KitDto kitDto) {
+        Kit convertedKit = modelKitConverterService.convertModelToKit(model);
+        Kit kit = mappingService.map(kitDto, Kit.class);
+
+        for (Brick brick : convertedKit.getBricks()) {
+            kit.addBrick(brick);
+        }
+
+        kitService.create(kit);
     }
 }

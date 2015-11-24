@@ -3,6 +3,7 @@ package org.legomanager.api.dto;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -82,5 +83,20 @@ public class KitDto {
 
     public void setMaxAge(short maxAge) {
         this.maxAge = maxAge;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {return true;}
+        if (!(o instanceof KitDto)) {return false;}
+
+        KitDto kit = (KitDto) o;
+
+        return kit.getName() != null && getName() != null && kit.getName().equals(getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName() != null ? getName().hashCode() : 0;
     }
 }

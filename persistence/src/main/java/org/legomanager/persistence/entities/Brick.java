@@ -24,13 +24,13 @@ public class Brick {
      * As the stubs count
      */
     @Column(nullable = false)
-    private short width;
+    private int width;
 
     /**
      * As the stubs count
      */
     @Column(nullable = false)
-    private short height;
+    private int height;
 
     @ManyToMany(mappedBy = "bricks")
     private Set<Kit> kits = new HashSet<Kit>();
@@ -49,6 +49,22 @@ public class Brick {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public Set<Kit> getKits() {
