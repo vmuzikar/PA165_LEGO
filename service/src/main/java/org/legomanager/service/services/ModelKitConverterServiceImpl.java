@@ -1,12 +1,12 @@
 package org.legomanager.service.services;
 
 import org.legomanager.api.exceptions.ModelKitConverterException;
-import org.legomanager.api.exceptions.ServiceException;
 import org.legomanager.api.representantions.ModelRepresentation;
 import org.legomanager.persistence.dao.BrickDao;
 import org.legomanager.persistence.entities.Brick;
 import org.legomanager.persistence.entities.Kit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
@@ -80,7 +80,13 @@ public class ModelKitConverterServiceImpl implements ModelKitConverterService {
         }
 
         // We try to find a largest suitable brick
-        Brick largestBrick = brickDao.getLargestBrick(stubsX, stubsY);
+        Brick largestBrick;
+        try {
+            largestBrick = brickDao.getLargestBrick(stubsX, stubsY);
+        }
+        catch (Exception e) {
+            throw new DataRetrievalFailureException("There was an error on DAO layer");
+        }
 
         // We didn't find any suitable brick = there will be a gap in the construction
         if (largestBrick == null) {

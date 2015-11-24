@@ -3,6 +3,7 @@ package org.legomanager.service.services;
 import org.legomanager.persistence.dao.KitDao;
 import org.legomanager.persistence.entities.Kit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +22,31 @@ public class KitServiceImpl extends AbstractBaseDaoServiceImpl<Kit> implements K
 
     public List<Kit> getKitsForKids() {
         KitDao kitDao = (KitDao) getDao();
-        return kitDao.getKitsWithAgeRange((short) 5, (short) 10);
+        try {
+            return kitDao.getKitsWithAgeRange((short) 5, (short) 10);
+        }
+        catch (Exception e) {
+            throw new DataRetrievalFailureException("There was an error on DAO layer");
+        }
     }
 
     public List<Kit> getKitsForTeenage() {
         KitDao kitDao = (KitDao) getDao();
-        return kitDao.getKitsWithAgeRange((short) 10, (short) 18);
+        try {
+            return kitDao.getKitsWithAgeRange((short) 10, (short) 18);
+        }
+        catch (Exception e) {
+            throw new DataRetrievalFailureException("There was an error on DAO layer");
+        }
     }
 
     public List<Kit> getKitsForAdults() {
         KitDao kitDao = (KitDao) getDao();
-        return kitDao.getKitsWithAgeRange((short) 18, (short) 99);
+        try {
+            return kitDao.getKitsWithAgeRange((short) 18, (short) 99);
+        }
+        catch (Exception e) {
+            throw new DataRetrievalFailureException("There was an error on DAO layer");
+        }
     }
 }
