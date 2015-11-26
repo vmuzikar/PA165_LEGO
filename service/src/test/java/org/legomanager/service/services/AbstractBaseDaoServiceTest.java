@@ -1,7 +1,6 @@
-package service.services;
+package org.legomanager.service.services;
 
 import org.legomanager.persistence.dao.AbstractBaseDao;
-import org.legomanager.service.services.AbstractBaseDaoService;
 import org.mockito.Mock;
 import org.testng.Assert;
 import org.testng.annotations.Test;

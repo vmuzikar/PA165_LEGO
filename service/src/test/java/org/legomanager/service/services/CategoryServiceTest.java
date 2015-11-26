@@ -1,13 +1,11 @@
-package service.services;
+package org.legomanager.service.services;
 
 import org.legomanager.persistence.entities.Category;
-import org.legomanager.service.services.AbstractBaseDaoService;
-import org.legomanager.service.services.CategoryService;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Tests the service for manipulation with kits
+ * Tests the service for manipulation with categories
  *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */

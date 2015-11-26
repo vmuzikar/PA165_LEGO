@@ -1,11 +1,10 @@
-package service.services;
+package org.legomanager.service.services;
 
 import org.legomanager.api.exceptions.ModelKitConverterException;
 import org.legomanager.api.representantions.ModelRepresentation;
 import org.legomanager.persistence.dao.BrickDao;
 import org.legomanager.persistence.entities.Brick;
 import org.legomanager.persistence.entities.Kit;
-import org.legomanager.service.services.ModelKitConverterService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;

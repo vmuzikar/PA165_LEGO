@@ -1,4 +1,4 @@
-package service.services;
+package org.legomanager.service.services;
 
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.Rollback;
