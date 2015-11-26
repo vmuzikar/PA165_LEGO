@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Implementation of service for manipulation with kits
  *
- * @author Michal Valeš <michal@vales.me>
+ * @author Michal Valeï¿½ <michal@vales.me>
  */
 @Service
 public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> implements CategoryService {
@@ -59,7 +59,6 @@ public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> im
     }
     
     private class CategoryComparatorByKitsSize implements Comparator<Category> {
-        @Override
         public int compare(Category c1, Category c2) {
             return (-1) * (c2.getKits().size() - c1.getKits().size());
         }

@@ -1,14 +1,21 @@
 package service.services;
 
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.annotations.BeforeClass;
 
 /**
- * Base test for testing services
+ * Base test class for testing services
  *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
 @ContextConfiguration("classpath:META-INF/service-context.xml")
 @Rollback(true)
-public abstract class AbstractServiceTest extends AbstractTransactionalTestNGSpringContextTests {}
+public abstract class AbstractServiceTest extends AbstractTransactionalTestNGSpringContextTests {
+    @BeforeClass
+    public void initServiceTests() {
+        MockitoAnnotations.initMocks(this);
+    }
+}

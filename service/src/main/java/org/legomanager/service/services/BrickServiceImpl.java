@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Implementation of service for manipulation with kits
  *
- * @author Michal Valeš <michal@vales.me>
+ * @author Michal Valeï¿½ <michal@vales.me>
  */
 @Service
 public class BrickServiceImpl extends AbstractBaseDaoServiceImpl<Brick> implements BrickService {
@@ -59,7 +59,6 @@ public class BrickServiceImpl extends AbstractBaseDaoServiceImpl<Brick> implemen
     }
     
     private class BrickComparatorByKitsSize implements Comparator<Brick> {
-        @Override
         public int compare(Brick b1, Brick b2) {
             return (-1) * (b2.getKits().size() - b1.getKits().size());
         }
