@@ -21,7 +21,12 @@ public abstract class AbstractBaseDaoServiceTest<E> extends AbstractServiceTest 
      * @return AbstractBaseDaoService
      */
     protected abstract AbstractBaseDaoService<E> getDaoService();
-    
+
+    /**
+     * Implements getter for the specific AbstractBaseDao
+     *
+     * @return base DAO
+     */
     protected abstract AbstractBaseDao<E> getDao();
 
     /**
