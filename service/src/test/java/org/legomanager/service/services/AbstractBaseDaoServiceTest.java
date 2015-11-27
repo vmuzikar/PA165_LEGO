@@ -15,15 +15,14 @@ import java.util.List;
  */
 public abstract class AbstractBaseDaoServiceTest<E> extends AbstractServiceTest {
 
-    @Mock
-    private AbstractBaseDao<E> baseDao;
-
     /**
      * Implements getter for the specific AbstractBaseDaoService
      *
      * @return AbstractBaseDaoService
      */
     protected abstract AbstractBaseDaoService<E> getDaoService();
+    
+    protected abstract AbstractBaseDao<E> getDao();
 
     /**
      * Subclass must implement creating (NOT persisting) of a specific entity
@@ -35,8 +34,8 @@ public abstract class AbstractBaseDaoServiceTest<E> extends AbstractServiceTest 
     /**
      * Subclass must implement this method for setting the primary key of an entity
      *
-     * @param entity an entity
-     * @return the key
+     * @param entity
+     * @param id
      */
     protected abstract void setIdForEntity(E entity, long id);
 
@@ -46,7 +45,7 @@ public abstract class AbstractBaseDaoServiceTest<E> extends AbstractServiceTest 
         long entityId = 1;
         setIdForEntity(entity, entityId);
 
-        when(baseDao.findById(1)).thenReturn(entity);
+        when(getDao().findById(1)).thenReturn(entity);
 
         E foundEntity = getDaoService().findById(entityId);
         Assert.assertEquals(foundEntity, entity);
@@ -60,7 +59,7 @@ public abstract class AbstractBaseDaoServiceTest<E> extends AbstractServiceTest 
             setIdForEntity(entity, i);
         }
 
-        doReturn(entities).when(baseDao).findAll();
+        doReturn(entities).when(getDao()).findAll();
 
         List<E> foundEntities = getDaoService().findAll();
         Assert.assertEquals(foundEntities, entities);
@@ -71,7 +70,7 @@ public abstract class AbstractBaseDaoServiceTest<E> extends AbstractServiceTest 
         E entity = createEntity();
         getDaoService().create(entity);
 
-        verify(baseDao).create(entity);
+        verify(getDao()).create(entity);
     }
 
     @Test
@@ -79,6 +78,6 @@ public abstract class AbstractBaseDaoServiceTest<E> extends AbstractServiceTest 
         E entity = createEntity();
         setIdForEntity(entity, 1);
         getDaoService().remove(entity);
-        verify(baseDao).delete(entity);
+        verify(getDao()).delete(entity);
     }
 }
