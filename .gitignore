@@ -56,3 +56,6 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 
+/persistence/target/
+/api/target/
+/service/target/

@@ -1,14 +1,14 @@
 package org.legomanager.service.services;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import org.legomanager.persistence.dao.CategoryDao;
 import org.legomanager.persistence.entities.Category;
+import org.legomanager.service.utils.SearchObjects;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Set;
+import org.legomanager.persistence.dao.AbstractBaseDao;
+import org.legomanager.persistence.entities.Kit;
 
 /**
  * Implementation of service for manipulation with kits
@@ -21,46 +21,42 @@ public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> im
     public CategoryServiceImpl(CategoryDao dao) {
         super(dao, Category.class);
     }
-
-    public List<Category> getUnused() {
-        CategoryDao categoryDao = (CategoryDao) getDao();
-        List<Category> fetchedCategories = null;
-        try {
-            fetchedCategories = categoryDao.findAll();
-        }
-        catch (Exception e) {
-            throw new DataRetrievalFailureException("There was an error on DAO layer");
-        }
-        Iterator<Category> it = fetchedCategories.iterator();
-        while (it.hasNext()) {
-            Category c = it.next();
-            if (c.getKits().isEmpty()) {
-                it.remove();
+    
+    public Category merge(Category target, List<Category> with) {
+        Category result = target;
+        for (Category c : with){
+            for (Kit k : c.getKits()){
+                if (!result.getKits().contains(k)) {
+                    result.addKit(k);
+                }
             }
+            getDao().delete(c);
         }
-        return fetchedCategories;
-    }
-
-    public List<Category> getWithMostKits(int count) {
-        if (count < 1) {
-            throw new IllegalArgumentException("Count must be at least 1");
-        }
-        CategoryDao categoryDao = (CategoryDao) getDao();
-        List<Category> fetchedCategories = null;
-        try {
-            fetchedCategories = categoryDao.findAll();
-        }
-        catch (Exception e) {
-            throw new DataRetrievalFailureException("There was an error on DAO layer");
-        }
-        Collections.sort(fetchedCategories, new CategoryComparatorByKitsSize());
-        List<Category> result = fetchedCategories.subList(0, Math.min(fetchedCategories.size(), count));
+        getDao().delete(target);
+        getDao().create(result);
         return result;
     }
     
-    private class CategoryComparatorByKitsSize implements Comparator<Category> {
-        public int compare(Category c1, Category c2) {
-            return (-1) * (c2.getKits().size() - c1.getKits().size());
+    public List<Category> getUnused() {
+        SearchCategory search = new SearchCategory(getDao());
+        return search.getUnused();
+    }
+    
+    public List<Category> getWithMostKits(int count) {
+        SearchCategory search = new SearchCategory(getDao());
+        return search.getMostUsed(count);
+    }
+    
+    private class SearchCategory extends SearchObjects<Category> {
+
+        public SearchCategory(AbstractBaseDao<Category> dao) {
+            super(dao);
         }
+        
+        @Override
+        protected Set<Kit> getKits(Category entity) {
+            return entity.getKits();
+        }
+        
     }
 }

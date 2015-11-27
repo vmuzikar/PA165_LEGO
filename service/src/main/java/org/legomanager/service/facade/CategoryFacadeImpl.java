@@ -39,6 +39,12 @@ public class CategoryFacadeImpl implements CategoryFacade {
         return (List<CategoryDto>) mappingService.map(categoryService.findAll(), CategoryDto.class);
     }
 
+    public CategoryDto merge(CategoryDto targetDto, List<CategoryDto> withDto) {
+        Category t = mappingService.map(targetDto, Category.class);
+        List<Category> w = (List<Category>) mappingService.map(withDto, Category.class);
+        return (CategoryDto) mappingService.map(categoryService.merge(t, w), CategoryDto.class);
+    }
+
     public List<CategoryDto> getUnusedCategories() {
         return (List<CategoryDto>) mappingService.map(categoryService.getUnused(), CategoryDto.class);
     }

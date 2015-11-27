@@ -33,6 +33,14 @@ public interface CategoryFacade {
     List<CategoryDto> getAllCategories();
     
     /**
+     * Merges kits from all categories into target category, all except the 
+     * target are deleted.
+     *
+     * @return Merged category.
+     */
+    CategoryDto merge(CategoryDto targetDto, List<CategoryDto> withDto);
+    
+    /**
      * Fetches all categories which are not containing any kit. 
      *
      * @return List of all categories which are not containing any kit.

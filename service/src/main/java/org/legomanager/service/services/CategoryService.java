@@ -9,6 +9,7 @@ import java.util.List;
  * @author Michal Valeš <michal@vales.me>
  */
 public interface CategoryService extends AbstractBaseDaoService<Category> {
+    public Category merge(Category target, List<Category> with);
     public List<Category> getUnused();
     public List<Category> getWithMostKits(int count);
 }
