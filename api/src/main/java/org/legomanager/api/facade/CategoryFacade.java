@@ -36,6 +36,8 @@ public interface CategoryFacade {
      * Merges kits from all categories into target category, all except the 
      * target are deleted.
      *
+     * @param targetDto Category for merging into.
+     * @param withDto List of categories to merge into target and delete.
      * @return Merged category.
      */
     CategoryDto merge(CategoryDto targetDto, List<CategoryDto> withDto);

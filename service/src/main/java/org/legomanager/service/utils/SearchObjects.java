@@ -61,7 +61,10 @@ public abstract class SearchObjects<E> {
     
     private class ComparatorByKitsSize implements Comparator<E> {
         public int compare(E e1, E e2) {
-            return (-1) * (getKits(e1).size() - getKits(e1).size());
+            int e1S = getKits(e1).size();
+            int e2S = getKits(e2).size();
+            int r = (-1)*(e1S - e2S);
+            return r;
         }
     }
     
