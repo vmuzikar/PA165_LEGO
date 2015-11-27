@@ -6,6 +6,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 /**
+ * DAO for Brick
+ *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
 @Repository

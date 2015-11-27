@@ -7,6 +7,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
+ * DAO for Kit
+ *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
 @Repository
