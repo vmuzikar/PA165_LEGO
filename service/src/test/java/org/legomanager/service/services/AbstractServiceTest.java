@@ -1,6 +1,7 @@
 package org.legomanager.service.services;
 
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -13,6 +14,7 @@ import org.testng.annotations.BeforeClass;
  */
 @ContextConfiguration("classpath:META-INF/service-context.xml")
 @Rollback(true)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public abstract class AbstractServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeClass
     public void initServiceTests() {
