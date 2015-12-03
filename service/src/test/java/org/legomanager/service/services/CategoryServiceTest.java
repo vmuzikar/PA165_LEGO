@@ -160,14 +160,15 @@ public class CategoryServiceTest extends AbstractBaseDaoServiceTest<Category> {
     
     @Test
     public void mergeCategoriesTest() {
-        List<Category> mergeWith = new ArrayList<Category>();
-        mergeWith.add(listOfCategories.get(3));
-        Category c = categoryService.merge(listOfCategories.get(1), mergeWith);
+        List<Long> mergeWith = new ArrayList<Long>();
+        mergeWith.add(listOfCategories.get(3).getId());
+        doReturn(listOfCategories.get(1)).when(categoryDao).findById(listOfCategories.get(1).getId());
+        doReturn(listOfCategories.get(3)).when(categoryDao).findById(listOfCategories.get(3).getId());
+        Category c = categoryService.merge(listOfCategories.get(1).getId(), mergeWith);
         Assert.assertTrue(c.getKits().contains(listOfKits.get(0)));
         Assert.assertTrue(c.getKits().contains(listOfKits.get(1)));
         Assert.assertTrue(c.getKits().size() == 2);
-        verify(getDao()).delete(listOfCategories.get(1));
+        verify(getDao()).update(listOfCategories.get(1));
         verify(getDao()).delete(listOfCategories.get(3));
-        verify(getDao()).create(c);
     }
 }

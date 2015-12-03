@@ -4,7 +4,10 @@ import org.legomanager.persistence.dao.CategoryDao;
 import org.legomanager.persistence.entities.Category;
 import org.legomanager.service.utils.SearchObjects;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.legomanager.persistence.dao.AbstractBaseDao;
@@ -14,6 +17,7 @@ import org.legomanager.persistence.entities.Kit;
  * Implementation of service for manipulation with kits
  *
  * @author Michal Vale� <michal@vales.me>
+ * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
 @Service
 public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> implements CategoryService {
@@ -22,18 +26,33 @@ public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> im
         super(dao, Category.class);
     }
     
-    public Category merge(Category target, List<Category> with) {
-        Category result = target;
+    public Category merge(long targetId, List<Long> withIds) {
+        CategoryDao dao = (CategoryDao) getDao();
+
+        Category result = dao.findById(targetId);
+        if (result == null) {
+            throw new DataRetrievalFailureException("Target category could not be found");
+
+        }
+
+        List<Category> with = new ArrayList<Category>();
+        for (long id : withIds) {
+            Category category = dao.findById(id);
+            if (category == null) {
+                throw new DataRetrievalFailureException("Source category could not be found");
+            }
+            with.add(category);
+        }
+
         for (Category c : with){
             for (Kit k : c.getKits()){
                 if (!result.getKits().contains(k)) {
                     result.addKit(k);
                 }
             }
-            getDao().delete(c);
+            dao.delete(c);
         }
-        getDao().delete(target);
-        getDao().create(result);
+        dao.update(result);
         return result;
     }
     
@@ -58,5 +77,10 @@ public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> im
             return entity.getKits();
         }
         
+    }
+
+    @Override
+    protected long getIdFromEntity(Category entity) {
+        return entity.getId();
     }
 }

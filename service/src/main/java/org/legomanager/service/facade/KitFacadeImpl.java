@@ -33,6 +33,7 @@ public class KitFacadeImpl implements org.legomanager.api.facade.KitFacade {
     public void createKit(KitDto kitDto) {
         Kit kit = mappingService.map(kitDto, Kit.class);
         kitService.create(kit);
+        kitDto.setId(kit.getId());
     }
 
     public void removeKit(KitDto kitDto) {

@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * Service for manipulation with bricks
  *
- * @author Michal Valeš <michal@vales.me>
+ * @author Michal Valeï¿½ <michal@vales.me>
  */
 public interface CategoryService extends AbstractBaseDaoService<Category> {
-    public Category merge(Category target, List<Category> with);
+    public Category merge(long targetId, List<Long> withIds);
     public List<Category> getUnused();
     public List<Category> getWithMostKits(int count);
 }

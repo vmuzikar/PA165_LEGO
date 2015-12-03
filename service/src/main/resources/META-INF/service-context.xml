@@ -11,6 +11,12 @@
 
     <context:component-scan base-package="org.legomanager.service" />
 
-    <bean id="mapper" class="org.dozer.DozerBeanMapper" />
+    <bean id="mapper" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+                <value>META-INF/dozer-config.xml</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>

@@ -14,8 +14,8 @@ import java.util.Set;
 public class KitDto {
     private long id;
     private String name;
-//    private CategoryDTO category;
-//    private Set<BrickDTO> bricks = new HashSet<BrickDTO>();
+    private CategoryDto category;
+    private Set<BrickDto> bricks = new HashSet<BrickDto>();
     private BigDecimal price;
     private Currency currency;
     private short minAge;
@@ -37,21 +37,21 @@ public class KitDto {
         this.name = name;
     }
 
-//    public CategoryDTO getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(CategoryDTO category) {
-//        this.category = category;
-//    }
-//
-//    public Set<BrickDTO> getBricks() {
-//        return bricks;
-//    }
-//
-//    public void setBricks(Set<BrickDTO> bricks) {
-//        this.bricks = bricks;
-//    }
+    public CategoryDto getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryDto category) {
+        this.category = category;
+    }
+
+    public Set<BrickDto> getBricks() {
+        return bricks;
+    }
+
+    public void setBricks(Set<BrickDto> bricks) {
+        this.bricks = bricks;
+    }
 
     public BigDecimal getPrice() {
         return price;

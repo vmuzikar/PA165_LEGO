@@ -7,13 +7,14 @@ import org.legomanager.api.facade.CategoryFacade;
 import org.legomanager.service.services.BeanMappingService;
 import org.legomanager.service.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.LocaleEditor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of facade for manipulation with categories
  *
- * @author Michal Valeš <michal@vales.me>
+ * @author Michal Valeï¿½ <michal@vales.me>
  */
 @Service
 @Transactional
@@ -28,6 +29,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
     public void createCategory(CategoryDto categoryDto) {
         Category category = mappingService.map(categoryDto, Category.class);
         categoryService.create(category);
+        categoryDto.setId(category.getId());
     }
 
     public void removeCategory(CategoryDto categoryDto) {
@@ -39,10 +41,8 @@ public class CategoryFacadeImpl implements CategoryFacade {
         return (List<CategoryDto>) mappingService.map(categoryService.findAll(), CategoryDto.class);
     }
 
-    public CategoryDto merge(CategoryDto targetDto, List<CategoryDto> withDto) {
-        Category t = mappingService.map(targetDto, Category.class);
-        List<Category> w = (List<Category>) mappingService.map(withDto, Category.class);
-        return (CategoryDto) mappingService.map(categoryService.merge(t, w), CategoryDto.class);
+    public CategoryDto merge(long targetId, List<Long> withIds) {
+        return (CategoryDto) mappingService.map(categoryService.merge(targetId, withIds), CategoryDto.class);
     }
 
     public List<CategoryDto> getUnusedCategories() {

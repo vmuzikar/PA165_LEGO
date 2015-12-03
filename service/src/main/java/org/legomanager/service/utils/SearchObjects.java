@@ -12,7 +12,7 @@ import org.springframework.dao.DataRetrievalFailureException;
 /**
  * Utility clas for generalized objects look-up.
  *
- * @author Michal Valeš <michal@vales.me>
+ * @author Michal Valeï¿½ <michal@vales.me>
  */
 public abstract class SearchObjects<E> {
     
@@ -35,6 +35,7 @@ public abstract class SearchObjects<E> {
         Iterator<E> it = fetched.iterator();
         while (it.hasNext()) {
             E e = it.next();
+            Set<Kit> kits = getKits(e);
             if (getKits(e).isEmpty()) {
             } else {
                 it.remove();

@@ -44,4 +44,9 @@ public class BrickServiceImpl extends AbstractBaseDaoServiceImpl<Brick> implemen
         }
         
     }
+
+    @Override
+    protected long getIdFromEntity(Brick entity) {
+        return entity.getId();
+    }
 }

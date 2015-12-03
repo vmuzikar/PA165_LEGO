@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Implementation of facade for manipulation with bricks
  *
- * @author Michal Valeš <michal@vales.me>
+ * @author Michal Valeï¿½ <michal@vales.me>
  */
 @Service
 @Transactional
@@ -28,6 +28,7 @@ public class BrickFacadeImpl implements BrickFacade {
     public void createBrick(BrickDto brickDto) {
         Brick brick = mappingService.map(brickDto, Brick.class);
         brickService.create(brick);
+        brickDto.setId(brick.getId());
     }
 
     public void removeBrick(BrickDto brickDto) {

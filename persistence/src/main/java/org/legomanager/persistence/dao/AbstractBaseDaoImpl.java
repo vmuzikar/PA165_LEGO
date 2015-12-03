@@ -31,7 +31,8 @@ public abstract class AbstractBaseDaoImpl<E> implements AbstractBaseDao<E> {
 
     @Override
     public void delete(E entity) {
-        em.remove(entity);
+        E eMerged = em.merge(entity);
+        em.remove(eMerged);
     }
 
     @Override
