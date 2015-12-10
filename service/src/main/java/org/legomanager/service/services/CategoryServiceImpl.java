@@ -22,6 +22,9 @@ import org.legomanager.persistence.entities.Kit;
 @Service
 public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> implements CategoryService {
     @Autowired
+    private KitService kitService;
+
+    @Autowired
     public CategoryServiceImpl(CategoryDao dao) {
         super(dao, Category.class);
     }
@@ -46,8 +49,9 @@ public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> im
 
         for (Category c : with){
             for (Kit k : c.getKits()){
-                if (!result.getKits().contains(k)) {
-                    result.addKit(k);
+                if (!k.getCategory().equals(result)) {
+                    k.setCategory(result);
+                    kitService.update(k);
                 }
             }
             dao.delete(c);
@@ -77,10 +81,5 @@ public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> im
             return entity.getKits();
         }
         
-    }
-
-    @Override
-    protected long getIdFromEntity(Category entity) {
-        return entity.getId();
     }
 }

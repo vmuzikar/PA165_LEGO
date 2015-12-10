@@ -10,6 +10,7 @@ import java.util.List;
 public interface AbstractBaseDaoService<E> {
     E findById(long id);
     List<E> findAll();
-    long create(E entity);
+    void create(E entity);
     void remove(E entity);
+    void update(E entity);
 }

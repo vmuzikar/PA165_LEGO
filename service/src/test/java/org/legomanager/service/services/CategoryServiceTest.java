@@ -24,7 +24,10 @@ public class CategoryServiceTest extends AbstractBaseDaoServiceTest<Category> {
     @Autowired
     @InjectMocks
     private CategoryService categoryService;
-    
+
+    @Mock
+    private KitService kitService;
+
     @Mock
     private CategoryDao categoryDao;
     
@@ -55,11 +58,12 @@ public class CategoryServiceTest extends AbstractBaseDaoServiceTest<Category> {
         for (int i = 1; i <= 5; i++) {
             listOfKits.add(createKit(i));
         }
-        listOfCategories.get(1).addKit(listOfKits.get(0));
-        listOfCategories.get(1).addKit(listOfKits.get(1));
-        listOfCategories.get(3).addKit(listOfKits.get(0));
-        listOfCategories.get(4).addKit(listOfKits.get(2));
-        listOfCategories.get(4).addKit(listOfKits.get(3));
+        listOfKits.get(0).setCategory(listOfCategories.get(1));
+        listOfKits.get(1).setCategory(listOfCategories.get(1));
+        listOfKits.get(0).setCategory(listOfCategories.get(3));
+        listOfKits.get(2).setCategory(listOfCategories.get(4));
+        listOfKits.get(3).setCategory(listOfCategories.get(4));
+        listOfKits.get(4).setCategory(listOfCategories.get(4));
         listOfCategories.get(4).addKit(listOfKits.get(4));
     }
 

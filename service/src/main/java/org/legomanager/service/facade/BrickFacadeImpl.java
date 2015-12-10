@@ -25,15 +25,24 @@ public class BrickFacadeImpl implements BrickFacade {
     @Autowired
     BeanMappingService mappingService;
 
-    public void createBrick(BrickDto brickDto) {
+    public long createBrick(BrickDto brickDto) {
         Brick brick = mappingService.map(brickDto, Brick.class);
         brickService.create(brick);
-        brickDto.setId(brick.getId());
+        return brick.getId();
     }
 
-    public void removeBrick(BrickDto brickDto) {
+    public void editBrick(BrickDto brickDto) {
         Brick brick = mappingService.map(brickDto, Brick.class);
+        brickService.update(brick);
+    }
+
+    public void removeBrick(long id) {
+        Brick brick = brickService.findById(id);
         brickService.remove(brick);
+    }
+
+    public BrickDto getBrick(long id) {
+        return mappingService.map(brickService.findById(id), BrickDto.class);
     }
 
     public List<BrickDto> getAllBricks() {

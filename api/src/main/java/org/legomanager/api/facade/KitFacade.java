@@ -11,8 +11,10 @@ import java.util.List;
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
 public interface KitFacade {
-    void createKit(KitDto kitDto);
-    void removeKit(KitDto kitDto);
+    long createKit(KitDto kitDto);
+    void editKit(KitDto kitDto);
+    void removeKit(long id);
+    KitDto getKit(long id);
     List<KitDto> getAllKits();
     List<KitDto> getKitsForKids();
     List<KitDto> getKitsForTeenage();

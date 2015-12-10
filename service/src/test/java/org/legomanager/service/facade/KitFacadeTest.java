@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.legomanager.api.dto.CategoryDto;
 import org.legomanager.api.dto.KitDto;
+import org.legomanager.api.facade.CategoryFacade;
 import org.legomanager.api.facade.KitFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -28,30 +29,31 @@ public class KitFacadeTest extends AbstractTransactionalTestNGSpringContextTests
     
     @Autowired
     private KitFacade kitFacade;
+
+    @Autowired
+    private CategoryFacade categoryFacade;
     
     private KitDto o1, o2;
-
-    private int kitCount, categoryCount;
 
     @BeforeMethod
     public void initObjects() {
         CategoryDto category = new CategoryDto();
-        category.setName("Categ" + categoryCount++);
+        category.setName("Categ");
+        long categId = categoryFacade.createCategory(category);
+
         o1 = new KitDto();
-        o1.setName("Kit" + kitCount++);
+        o1.setName("Kit1");
         o1.setMinAge((short) 19);
         o1.setMaxAge((short) 79);
-        o1.setCategory(category);
+        o1.setCategoryId(categId);
         o1.setCurrency(Currency.getInstance("CZK"));
         o1.setPrice(new BigDecimal("2459.99"));
 
-        category = new CategoryDto();
-        category.setName("Categ" + categoryCount++);
         o2 = new KitDto();
-        o2.setName("Kit" + kitCount++);
+        o2.setName("Kit2");
         o2.setMinAge((short) 1);
         o2.setMaxAge((short) 9);
-        o2.setCategory(category);
+        o2.setCategoryId(categId);
         o2.setCurrency(Currency.getInstance("CZK"));
         o2.setPrice(new BigDecimal("2459.99"));
     }
@@ -59,20 +61,20 @@ public class KitFacadeTest extends AbstractTransactionalTestNGSpringContextTests
     
     @Test
     public void createRemoveGetBrickTest() {
-        kitFacade.createKit(o1);
+        long o1Id = kitFacade.createKit(o1);
         List<KitDto> kList = kitFacade.getAllKits();
         Assert.assertEquals(kList.size(), 1);
         Assert.assertTrue(kList.contains(o1));
-        kitFacade.createKit(o2);
+        long o2Id = kitFacade.createKit(o2);
         kList = kitFacade.getAllKits();
         Assert.assertEquals(kList.size(), 2);
         Assert.assertTrue(kList.contains(o1));
         Assert.assertTrue(kList.contains(o2));
-        kitFacade.removeKit(o1);
+        kitFacade.removeKit(o1Id);
         kList = kitFacade.getAllKits();
         Assert.assertEquals(kList.size(), 1);
         Assert.assertTrue(kList.contains(o2));
-        kitFacade.removeKit(o2);
+        kitFacade.removeKit(o2Id);
         kList = kitFacade.getAllKits();
         Assert.assertTrue(kList.isEmpty());
     }

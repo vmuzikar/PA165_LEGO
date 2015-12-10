@@ -40,7 +40,6 @@ public class BeanMappingTest extends AbstractServiceTest {
         BrickDto brickDto = mappingService.map(brick, BrickDto.class);
 
         Assert.assertEquals(brickDto.getName(), brick.getName());
-        Assert.assertEquals(brickDto.getKits().size(), brick.getKits().size());
     }
 
     @Test

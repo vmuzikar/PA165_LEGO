@@ -28,8 +28,6 @@ public abstract class AbstractBaseDaoServiceImpl<E> implements AbstractBaseDaoSe
         return dao;
     }
 
-    protected abstract long getIdFromEntity(E entity);
-
     public E findById(long id) {
         try {
             return getDao().findById(id);
@@ -48,10 +46,9 @@ public abstract class AbstractBaseDaoServiceImpl<E> implements AbstractBaseDaoSe
         }
     }
 
-    public long create(E entity) {
+    public void create(E entity) {
         try {
             getDao().create(entity);
-            return getIdFromEntity(entity);
         }
         catch (Exception e) {
             throw new NonTransientDataAccessResourceException("There was an error on DAO layer");
@@ -61,6 +58,15 @@ public abstract class AbstractBaseDaoServiceImpl<E> implements AbstractBaseDaoSe
     public void remove(E entity) {
         try {
             getDao().delete(entity);
+        }
+        catch (Exception e) {
+            throw new NonTransientDataAccessResourceException("There was an error on DAO layer");
+        }
+    }
+
+    public void update(E entity) {
+        try {
+            getDao().update(entity);
         }
         catch (Exception e) {
             throw new NonTransientDataAccessResourceException("There was an error on DAO layer");

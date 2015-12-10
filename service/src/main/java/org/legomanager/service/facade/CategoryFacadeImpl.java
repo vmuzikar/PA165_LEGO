@@ -26,23 +26,32 @@ public class CategoryFacadeImpl implements CategoryFacade {
     @Autowired
     BeanMappingService mappingService;
 
-    public void createCategory(CategoryDto categoryDto) {
+    public long createCategory(CategoryDto categoryDto) {
         Category category = mappingService.map(categoryDto, Category.class);
         categoryService.create(category);
-        categoryDto.setId(category.getId());
+        return category.getId();
     }
 
-    public void removeCategory(CategoryDto categoryDto) {
+    public void editCategory(CategoryDto categoryDto) {
         Category category = mappingService.map(categoryDto, Category.class);
+        categoryService.update(category);
+    }
+
+    public void removeCategory(long id) {
+        Category category = categoryService.findById(id);
         categoryService.remove(category);
+    }
+
+    public CategoryDto getCategory(long id) {
+        return mappingService.map(categoryService.findById(id), CategoryDto.class);
     }
 
     public List<CategoryDto> getAllCategories() {
         return (List<CategoryDto>) mappingService.map(categoryService.findAll(), CategoryDto.class);
     }
 
-    public CategoryDto merge(long targetId, List<Long> withIds) {
-        return (CategoryDto) mappingService.map(categoryService.merge(targetId, withIds), CategoryDto.class);
+    public void merge(long targetId, List<Long> withIds) {
+        categoryService.merge(targetId, withIds);
     }
 
     public List<CategoryDto> getUnusedCategories() {

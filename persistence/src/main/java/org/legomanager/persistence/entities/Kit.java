@@ -9,9 +9,6 @@ import java.util.Set;
 
 /**
  * Representation of a kit
- * TODO: [?] Many-to-many not empty constraint [?]
- * TODO: [?] Bricks counts [?]
- * TODO: [?] Price constrains [?]
  *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
@@ -74,6 +71,17 @@ public class Kit {
     public void addBrick(Brick brick) {
         bricks.add(brick);
         brick.addKit(this);
+    }
+
+    public void removeBrick(Brick brick) {
+        bricks.remove(brick);
+        brick.removeKit(this);
+    }
+
+    public void removeAllBricks() {
+        for (Brick brick : bricks) {
+            removeBrick(brick);
+        }
     }
 
     public BigDecimal getPrice() {

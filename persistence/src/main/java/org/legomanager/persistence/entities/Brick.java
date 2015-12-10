@@ -7,7 +7,6 @@ import java.util.Set;
 
 /**
  * Representation of a single LEGO brick
- * TODO: [?] Many-to-many not empty constraint [?]
  *
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
@@ -73,6 +72,10 @@ public class Brick {
 
     public void addKit(Kit kit) {
         kits.add(kit);
+    }
+
+    public void removeKit(Kit kit) {
+        kits.remove(kit);
     }
 
     @Override

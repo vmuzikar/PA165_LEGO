@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Facade for manipulation with bricks
  *
- * @author Michal Valeš <michal@vales.me>
+ * @author Michal Valeï¿½ <michal@vales.me>
  */
 public interface BrickFacade {
     
@@ -16,15 +16,19 @@ public interface BrickFacade {
      *
      * @param brickDto Brick to be created.
      */
-    void createBrick(BrickDto brickDto);
+    long createBrick(BrickDto brickDto);
+
+    void editBrick(BrickDto brickDto);
     
     /**
      * Deletes brick. 
      *
-     * @param brickDto Brick to be deleted.
+     * @param id Brick to be deleted.
      */
-    void removeBrick(BrickDto brickDto);
-    
+    void removeBrick(long id);
+
+    BrickDto getBrick(long id);
+
     /**
      * Fetches all bricks. 
      *

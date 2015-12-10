@@ -31,22 +31,14 @@ public class CategoryFacadeTest extends AbstractTransactionalTestNGSpringContext
     @Autowired
     private KitFacade kitFacade;
 
-    private KitDto kit;
-    
     private CategoryDto o1, o2;
-    
+
+    private short kitsCounter = 1;
+
     @BeforeMethod
     public void initObjects() {
         o1 = new CategoryDto();
         o1.setName("C 1");
-
-        kit = new KitDto();
-        kit.setName("Kit");
-        kit.setCategory(o1);
-        kit.setMinAge((short) 1);
-        kit.setMaxAge((short) 9);
-        kit.setCurrency(Currency.getInstance("CZK"));
-        kit.setPrice(new BigDecimal("2459.99"));
         
         o2 = new CategoryDto();
         o2.setName("C 2");
@@ -54,28 +46,31 @@ public class CategoryFacadeTest extends AbstractTransactionalTestNGSpringContext
     
     @Test
     public void createRemoveGetCategoryTest() {
-        categoryFacade.createCategory(o1);
+        long o1Id = categoryFacade.createCategory(o1);
         List<CategoryDto> cList = categoryFacade.getAllCategories();
         Assert.assertEquals(cList.size(), 1);
         Assert.assertTrue(cList.contains(o1));
-        categoryFacade.createCategory(o2);
+        long o2Id = categoryFacade.createCategory(o2);
         cList = categoryFacade.getAllCategories();
         Assert.assertEquals(cList.size(), 2);
         Assert.assertTrue(cList.contains(o1));
         Assert.assertTrue(cList.contains(o2));
-        categoryFacade.removeCategory(o1);
+        categoryFacade.removeCategory(o1Id);
         cList = categoryFacade.getAllCategories();
         Assert.assertEquals(cList.size(), 1);
         Assert.assertTrue(cList.contains(o2));
-        categoryFacade.removeCategory(o2);
+        categoryFacade.removeCategory(o2Id);
         cList = categoryFacade.getAllCategories();
         Assert.assertTrue(cList.isEmpty());
     }
 
     @Test
     public void unusedCategoryTest() {
-        kitFacade.createKit(kit);
+        long categId = categoryFacade.createCategory(o1);
         categoryFacade.createCategory(o2);
+
+        createKit(categId);
+
         List<CategoryDto> cList = categoryFacade.getUnusedCategories();
         Assert.assertEquals(cList.size(), 1);
         Assert.assertTrue(cList.contains(o2));
@@ -83,21 +78,50 @@ public class CategoryFacadeTest extends AbstractTransactionalTestNGSpringContext
     
     @Test
     public void categoryWithMostKitsTest() {
-        kitFacade.createKit(kit);
+        long categId = categoryFacade.createCategory(o1);
         categoryFacade.createCategory(o2);
-        List<CategoryDto> cList = categoryFacade.getCategoriesWithMostKits(1);
+
+        List<CategoryDto> cList = categoryFacade.getCategoriesWithMostKits(2);
+        Assert.assertEquals(cList.size(), 2);
+        Assert.assertTrue(cList.contains(o1));
+        Assert.assertTrue(cList.contains(o2));
+
+        createKit(categId);
+
+        cList = categoryFacade.getCategoriesWithMostKits(1);
         Assert.assertEquals(cList.size(), 1);
         Assert.assertTrue(cList.contains(o1));
     }
     
     @Test
     public void mergeTest() {
-        categoryFacade.createCategory(o1);
-        categoryFacade.createCategory(o2);
-        List<Long> l = new ArrayList<Long>();
-        l.add(o2.getId());
-        CategoryDto c = categoryFacade.merge(o1.getId(), l);
-        Assert.assertEquals(c.getKits().size(), 0);
+        CategoryDto category3 = new CategoryDto();
+        category3.setName("Categ3");
+
+        long categ1Id = categoryFacade.createCategory(o1);
+        long categ2Id = categoryFacade.createCategory(o2);
+        long categ3Id = categoryFacade.createCategory(category3);
+
+        long kit1Id = createKit(categ1Id);
+        long kit2Id = createKit(categ2Id);
+
+        categoryFacade.merge(categ3Id, Arrays.asList(categ1Id, categ2Id));
+
+        KitDto kit1 = kitFacade.getKit(kit1Id);
+        KitDto kit2 = kitFacade.getKit(kit2Id);
+
+        Assert.assertEquals((long) kit1.getCategoryId(), categ3Id);
+        Assert.assertEquals((long) kit2.getCategoryId(), categ3Id);
     }
 
+    private long createKit(long category) {
+        KitDto kit = new KitDto();
+        kit.setName("Kit" + kitsCounter++);
+        kit.setMinAge((short) 19);
+        kit.setMaxAge((short) 79);
+        kit.setCategoryId(category);
+        kit.setCurrency(Currency.getInstance("CZK"));
+        kit.setPrice(new BigDecimal("2459.99"));
+        return kitFacade.createKit(kit);
+    }
 }

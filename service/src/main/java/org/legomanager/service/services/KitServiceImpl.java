@@ -49,9 +49,4 @@ public class KitServiceImpl extends AbstractBaseDaoServiceImpl<Kit> implements K
             throw new DataRetrievalFailureException("There was an error on DAO layer");
         }
     }
-
-    @Override
-    protected long getIdFromEntity(Kit entity) {
-        return entity.getId();
-    }
 }

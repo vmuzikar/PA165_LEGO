@@ -1,5 +1,6 @@
 package org.legomanager.api.facade;
 
+import org.legomanager.api.dto.BrickDto;
 import org.legomanager.api.dto.CategoryDto;
 
 import java.util.List;
@@ -16,15 +17,19 @@ public interface CategoryFacade {
      *
      * @param categoryDto Category to be created.
      */
-    void createCategory(CategoryDto categoryDto);
+    long createCategory(CategoryDto categoryDto);
+
+    void editCategory(CategoryDto categoryDto);
     
     /**
      * Deletes category. 
      *
-     * @param categoryDto Category to be deleted.
+     * @param id Category to be deleted.
      */
-    void removeCategory(CategoryDto categoryDto);
-    
+    void removeCategory(long id);
+
+    CategoryDto getCategory(long id);
+
     /**
      * Fetches all categories. 
      *
@@ -38,9 +43,8 @@ public interface CategoryFacade {
      *
      * @param targetId Category for merging into.
      * @param withIds List of categories to merge into target and delete.
-     * @return Merged category.
      */
-    CategoryDto merge(long targetId, List<Long> withIds);
+    void merge(long targetId, List<Long> withIds);
     
     /**
      * Fetches all categories which are not containing any kit. 
