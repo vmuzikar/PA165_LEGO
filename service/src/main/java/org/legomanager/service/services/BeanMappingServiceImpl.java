@@ -19,13 +19,16 @@ public class BeanMappingServiceImpl implements BeanMappingService {
     private Mapper mapper;
 
     public <T> T map(Object obj, Class<T> mapTo) {
+        if (obj == null) {
+            return null;
+        }
         return mapper.map(obj, mapTo);
     }
 
     public <T> Collection<T> map(Collection<?> objs, Class<T> mapTo) {
         List<T> ret = new ArrayList<T>();
         for (Object obj : objs) {
-            ret.add(mapper.map(obj, mapTo));
+            ret.add(map(obj, mapTo));
         }
         return ret;
     }
