@@ -14,6 +14,14 @@
 
     <context:component-scan base-package="org.legomanager.web" />
 
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
+
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -31,6 +39,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
+    <mvc:view-controller path="/" view-name="home" />
+
+    <mvc:default-servlet-handler />
 
 </beans>
