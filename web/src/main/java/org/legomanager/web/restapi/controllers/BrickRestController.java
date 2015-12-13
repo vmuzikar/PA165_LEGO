@@ -23,7 +23,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
  */
 @RestController
 @RequestMapping(Urls.REST_ROOT + Urls.BRICK)
-public class BrickController {
+public class BrickRestController {
     @Autowired
     private BrickFacade brickFacade;
 
@@ -41,7 +41,7 @@ public class BrickController {
         List<BrickResource> bricksResourcesList = brickResourceAssembler.toResources(bricksDtos);
         Resources<BrickResource> bricksResources = new Resources<>(bricksResourcesList);
 
-        bricksResources.add(linkTo(methodOn(BrickController.class).create(null)).withRel("create"));
+        bricksResources.add(linkTo(methodOn(BrickRestController.class).create(null)).withRel("create"));
 
         return new ResponseEntity<>(bricksResources, HttpStatus.OK);
     }
@@ -66,7 +66,7 @@ public class BrickController {
      * @param brickDto provided by JSON
      * @return the created Brick or "409 Conflict if there was a constraint violation"
      */
-    @RequestMapping(value = Urls.REST_CREATE, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = Urls.CREATE, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<BrickResource> create(@RequestBody BrickDto brickDto) {
         long id;
         try {

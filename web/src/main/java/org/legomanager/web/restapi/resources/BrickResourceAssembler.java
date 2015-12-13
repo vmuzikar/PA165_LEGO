@@ -1,7 +1,7 @@
 package org.legomanager.web.restapi.resources;
 
 import org.legomanager.api.dto.BrickDto;
-import org.legomanager.web.restapi.controllers.BrickController;
+import org.legomanager.web.restapi.controllers.BrickRestController;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
@@ -16,13 +16,13 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 @Component
 public class BrickResourceAssembler extends ResourceAssemblerSupport<BrickDto, BrickResource> {
     public BrickResourceAssembler() {
-        super(BrickController.class, BrickResource.class);
+        super(BrickRestController.class, BrickResource.class);
     }
 
     public BrickResource toResource(BrickDto brickDto) {
         BrickResource brickResource = new BrickResource(brickDto);
 
-        Link selfLink = linkTo(methodOn(BrickController.class).getById(brickDto.getId())).withSelfRel();
+        Link selfLink = linkTo(methodOn(BrickRestController.class).getById(brickDto.getId())).withSelfRel();
         brickResource.add(selfLink);
 
         return brickResource;

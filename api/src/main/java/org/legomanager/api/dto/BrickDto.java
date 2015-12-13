@@ -1,7 +1,10 @@
 package org.legomanager.api.dto;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * Representation of a brick
@@ -10,8 +13,15 @@ import java.util.Set;
  */
 public class BrickDto {
     private long id;
+
+    @NotNull(message = "must be filled")
+    @NotBlank(message = "must be filled")
     private String name;
+
+    @Min(message = "must be at least 1", value = 1)
     private int width;
+
+    @Min(message = "must be at least 1", value = 1)
     private int height;
 
     public int getWidth() {
