@@ -6,6 +6,7 @@ package org.legomanager.web;
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
 public final class Urls {
+    public final static String HOME = "/";
     public final static String REST_ROOT = "/rest/v1";
     public final static String CREATE = "/create";
     public final static String BRICK = "/brick";

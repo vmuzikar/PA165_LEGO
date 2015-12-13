@@ -1,0 +1,13 @@
+main {
+    margin: 0 10%;
+}
+p {
+    text-align: justify;
+}
+.navbar input[type="text"] {
+    width: 10em;
+}
+.img-spread {
+    max-width: 100%;
+    height: auto;
+}

@@ -98,7 +98,7 @@ public class WebAppInitValues implements InitializingBean {
         kitFacade.createKit(kitDto);
 
         kitDto = new KitDto();
-        kitDto.setName("Star Wars Voyager For Seniors");
+        kitDto.setName("Star Trek Voyager For Seniors");
         kitDto.setCategoryId(categST);
         kitDto.setMinAge((short) 80);
         kitDto.setMaxAge((short) 149);
