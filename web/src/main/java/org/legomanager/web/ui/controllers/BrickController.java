@@ -31,6 +31,18 @@ public class BrickController {
         model.addAttribute("bricks", brickFacade.getAllBricks());
         return "bricks/list";
     }
+    
+    @RequestMapping(value = Urls.UNUSED, method = RequestMethod.GET)
+    public String getUnused(Model model) {
+        model.addAttribute("bricks", brickFacade.getUnusedBricks());
+        return "bricks/list";
+    }
+    
+    @RequestMapping(value = Urls.UNUSED + "/{amount}", method = RequestMethod.GET)
+    public String getMostUsed(@PathVariable int amount, Model model) {
+        model.addAttribute("bricks", brickFacade.getMostUsedBricks(amount));
+        return "bricks/list";
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable long id, Model model) {

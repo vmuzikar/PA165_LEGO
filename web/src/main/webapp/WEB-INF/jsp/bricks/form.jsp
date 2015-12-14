@@ -16,6 +16,6 @@
         </div>
         <form:errors />
     </form:form>
-    <a href="<c:url value="/brick" />"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+    <a href="#" onclick="window.history.go(-1); return false;"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
 
 </l:template>

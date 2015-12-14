@@ -32,3 +32,13 @@ p {
 .right-align {
     text-align: right;
 }
+input.inline {
+    width: 3em !important;
+}
+.controls {
+    text-align: right;
+    margin-bottom: 1em;
+}
+.controls .input-group {
+    margin-left: 1em;
+}
