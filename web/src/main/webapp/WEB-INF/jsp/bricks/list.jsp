@@ -24,7 +24,7 @@
                     <tr>
                         <td><c:out value="${brick.name}" /></td>
                         <td>${brick.width} &times; ${brick.height}</td>
-                        <td><a href="<c:url value="/brick/${brick.id}" />" ><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><span class="sr-only">details</span></a></td>
+                        <td class="right-align"><a href="<c:url value="/brick/${brick.id}" />" ><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><span class="sr-only">details</span></a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -35,6 +35,6 @@
         </c:otherwise>
     </c:choose>
 
-    <p><a href="<c:url value="/brick/create" />" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a></p>
+    <div><a href="<c:url value="/brick/create" />" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a></div>
 
 </l:template>

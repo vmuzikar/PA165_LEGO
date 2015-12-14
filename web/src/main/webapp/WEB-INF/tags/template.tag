@@ -11,6 +11,8 @@
         </c:if>
         Lego Manager
     </title>
+    <link rel="shortcut icon" href="<c:url value="/favicon.ico" />" />
+    <link rel="apple-touch-icon" href="<c:url value="/apple-touch-icon.png" />" />
     <link rel="stylesheet" href="<c:url value="/bootstrap/css/bootstrap.min.css" />" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/datatables/datatables.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/default.css" />" />
@@ -25,12 +27,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">LEGO Manager</a>
+      <a class="navbar-brand" href="<c:url value="/" />">LEGO MANAGER</a>
     </div>
     <div class="collapse navbar-collapse" id="mob-menu">
       <ul class="nav navbar-nav">
         <li><a href="<c:url value="/" />">Home</a></li>
         <li><a href="<c:url value="/brick" />">Bricks</a></li>
+        <li><a href="<c:url value="/kit" />">Kits</a></li>
+        <li><a href="<c:url value="/category" />">Categories</a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">

@@ -2,9 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <l:template title="${brick.name}">
 
-    <table>
-        <tr><td>Width:</td><td><c:out value="${brick.width}" /></td></tr>
-        <tr><td>Height:</td><td><c:out value="${brick.height}" /></td></tr>
+    <table class="table">
+        <tr><td>Width:</td><td class="right-align"><c:out value="${brick.width}" /></td></tr>
+        <tr><td>Height:</td><td class="right-align"><c:out value="${brick.height}" /></td></tr>
     </table>
+
+    <a href="<c:url value="/brick" />"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
 
 </l:template>

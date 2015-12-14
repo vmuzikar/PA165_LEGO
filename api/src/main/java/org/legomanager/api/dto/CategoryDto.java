@@ -2,14 +2,19 @@ package org.legomanager.api.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Representation of a brick
  *
- * @author Michal Vale� <michal@vales.me>
+ * @author Michal Valeš <michal@vales.me>
  */
 public class CategoryDto {
     private long id;
+    
+    @NotNull(message = "Name must be filled.")
+    @NotBlank(message = "Name must be filled.")
     private String name;
 
     public long getId() {

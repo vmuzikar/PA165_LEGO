@@ -4,13 +4,18 @@
 <l:template title="Add brick">
 
     <form:form method="post" modelAttribute="brick">
-        <table>
-            <tr><td>Name:</td><td><form:input path="name" /><form:errors path="name" /></td></tr>
-            <tr><td>Width:</td><td><form:input path="width" /><form:errors path="width" /></td></tr>
-            <tr><td>Height:</td><td><form:input path="height" /><form:errors path="height" /></td></tr>
+        <table class="table">
+            <tr><td><label for="name">Name:</label></td><td><form:input path="name" class="form-control" /><form:errors path="name" /></td></tr>
+            <tr><td><label for="width">Width:</label></td><td><form:input path="width" class="form-control" /><form:errors path="width" /></td></tr>
+            <tr><td><label for="height">Height:</label></td><td><form:input path="height" class="form-control" /><form:errors path="height" /></td></tr>
         </table>
-        <input type="submit" value="Save!" />
+        <div class="right-align">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
+            </button>
+        </div>
         <form:errors />
     </form:form>
+    <a href="<c:url value="/brick" />"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
 
 </l:template>

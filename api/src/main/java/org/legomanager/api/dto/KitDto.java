@@ -3,8 +3,13 @@ package org.legomanager.api.dto;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Representation of a kit
@@ -13,12 +18,26 @@ import java.util.Set;
  */
 public class KitDto {
     private long id;
+    
+    @NotNull(message = "Name must be filled.")
+    @NotBlank(message = "Name must be filled.")
     private String name;
+    
     private Long categoryId;
+    
     private Set<Long> bricksIds = new HashSet<Long>();
+    
+    @Digits(integer = 9, fraction = 2, message = "Price must have at most two fraction digits and nine digits.")
+    @DecimalMin(value = "0.00", message = "Price can't be negative.")
     private BigDecimal price;
+    
     private Currency currency;
+    
+    @Min(value = 0, message = "Minimal age must be at least 0.")
     private short minAge;
+    
+    @Min(value = 0, message = "Maximal age must be at least 0.")
+    @Max(value = 99, message = "Maximal age must be at most 99.")
     private short maxAge;
 
     public long getId() {

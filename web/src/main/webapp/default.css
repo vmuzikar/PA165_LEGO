@@ -1,13 +1,34 @@
+@font-face {
+    font-family: LegoThick;
+    src: url(legothick.ttf);
+} 
 main {
     margin: 0 10%;
 }
 p {
     text-align: justify;
 }
+.navbar {
+    background-image: url(lego-pattern.jpg);
+    background-repeat: repeat;
+    box-shadow: 0 0 15px #555;
+}
+.navbar-brand {
+    font-family: LegoThick, sans-serif;
+    font-size: 20px;
+}
 .navbar input[type="text"] {
-    width: 10em;
+    width: 7em;
+}
+@media (max-width: 767px) {
+    .navbar input[type="text"], .navbar button[type="submit"] {
+        width: 100%;
+    }
 }
 .img-spread {
     max-width: 100%;
     height: auto;
+}
+.right-align {
+    text-align: right;
 }

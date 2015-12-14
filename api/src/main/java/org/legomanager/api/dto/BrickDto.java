@@ -4,24 +4,23 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 /**
  * Representation of a brick
  *
- * @author Michal Vale� <michal@vales.me>
+ * @author Michal Valeš <michal@vales.me>
  */
 public class BrickDto {
     private long id;
 
-    @NotNull(message = "must be filled")
-    @NotBlank(message = "must be filled")
+    @NotNull(message = "Name must be filled.")
+    @NotBlank(message = "Name must be filled.")
     private String name;
 
-    @Min(message = "must be at least 1", value = 1)
+    @Min(message = "Width must be at least 1.", value = 1)
     private int width;
 
-    @Min(message = "must be at least 1", value = 1)
+    @Min(message = "Height must be at least 1.", value = 1)
     private int height;
 
     public int getWidth() {
