@@ -11,7 +11,7 @@
         <div class="pull-right mobile-full">
             <a href="<c:url value="/brick" />"
                class="btn btn-primary mobile-full<c:if 
-                   test="${fn:endsWith(pageContext.request.contextPath, '/brick')}"> disabled</c:if>">All</a><a 
+                   test="${fn:endsWith(requestScope['javax.servlet.forward.request_uri'], '/brick')}"> disabled</c:if>">All</a><a
                href="<c:url value="/brick/unused" />" 
                class="btn btn-primary spaced mobile-full">Unused</a>
             <div class="input-group pull-right mobile-full">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    
+
     <c:choose>
         <c:when test="${not empty bricks}">
             <table id="list" class="display table table-striped" width="100%" cellspacing="0">
