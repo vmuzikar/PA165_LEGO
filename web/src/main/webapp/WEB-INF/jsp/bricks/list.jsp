@@ -13,7 +13,8 @@
                class="btn btn-primary mobile-full<c:if 
                    test="${fn:endsWith(requestScope['javax.servlet.forward.request_uri'], '/brick')}"> disabled</c:if>">All</a><a
                href="<c:url value="/brick/unused" />" 
-               class="btn btn-primary spaced mobile-full">Unused</a>
+               class="btn btn-primary spaced mobile-full<c:if 
+                   test="${fn:endsWith(requestScope['javax.servlet.forward.request_uri'], '/unused')}"> disabled</c:if>">Unused</a>
             <div class="input-group pull-right mobile-full">
                 <input type="number" class="form-control inline" id="amount" value="3" min="1" max="99">
                 <span class="input-group-btn">
@@ -46,7 +47,16 @@
                     <tr>
                         <td><c:out value="${brick.name}" /></td>
                         <td>${brick.width} &times; ${brick.height}</td>
-                        <td class="right-align"><a href="<c:url value="/brick/${brick.id}" />" ><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><span class="sr-only">details</span></a></td>
+                        <td class="right-align">
+                            <a href="<c:url value="/brick/${brick.id}" />"><span 
+                                    class="glyphicon glyphicon-folder-open" 
+                                    aria-hidden="true"></span><span 
+                                    class="sr-only">details</span></a> 
+                            <a href="<c:url value="/brick/delete/${brick.id}" />" class="link-del"><span 
+                                    class="glyphicon glyphicon-trash" 
+                                    aria-hidden="true"></span><span 
+                                    class="sr-only">delete</span></a>         
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

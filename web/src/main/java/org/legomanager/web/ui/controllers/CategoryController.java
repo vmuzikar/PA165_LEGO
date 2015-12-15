@@ -68,10 +68,9 @@ public class CategoryController {
             BindingResult bindingResult, Model model
     )
     {
-        long newId;
         if (!bindingResult.hasErrors()) {
-            newId = categoryFacade.createCategory(categoryDto);
-            return "redirect:" + newId;
+            categoryFacade.createCategory(categoryDto);
+            return "redirect:";
         }
         else {
             return "categories/form";

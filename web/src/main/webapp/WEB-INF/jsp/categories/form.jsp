@@ -14,6 +14,6 @@
         </div>
         <form:errors />
     </form:form>
-    <a href="#" onclick="window.history.go(-1); return false;"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+    <a href="<c:url value="/category" />"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back to all</a>
 
 </l:template>

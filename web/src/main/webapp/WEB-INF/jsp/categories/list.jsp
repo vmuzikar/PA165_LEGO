@@ -11,9 +11,10 @@
         <div class="pull-right mobile-full">
             <a href="<c:url value="/category" />"
                class="btn btn-primary mobile-full<c:if 
-                   test="${fn:endsWith(pageContext.request.contextPath, '/brick')}"> disabled</c:if>">All</a><a 
+                   test="${fn:endsWith(pageContext.request.contextPath, '/category')}"> disabled</c:if>">All</a><a 
                href="<c:url value="/category/unused" />" 
-               class="btn btn-primary spaced mobile-full">Unused</a>
+               class="btn btn-primary spaced mobile-full<c:if 
+                   test="${fn:endsWith(requestScope['javax.servlet.forward.request_uri'], '/unused')}"> disabled</c:if>">Unused</a>
             <div class="input-group pull-right mobile-full">
                 <input type="number" class="form-control inline" id="amount" value="3" min="1" max="99">
                 <span class="input-group-btn">
@@ -42,6 +43,7 @@
                 <tbody>
                 <c:forEach items="${categories}" var="category">
                     <tr>
+                        <td><c:out value="${category.name}" /></td>
                         <td><c:out value="${category.name}" /></td>
                         <td class="right-align"><a href="<c:url value="/category/${category.id}" />" ><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><span class="sr-only">details</span></a></td>
                     </tr>

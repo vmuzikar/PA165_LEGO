@@ -61,17 +61,21 @@ public class BrickController {
         model.addAttribute("brick", new BrickDto());
         return "bricks/form";
     }
+    
+    @RequestMapping(value = Urls.DELETE + "/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable long id, Model model) {
+        brickFacade.removeBrick(id);
+        return "redirect:/brick";
+    }
 
     @RequestMapping(value = Urls.CREATE, method = RequestMethod.POST)
     public String createProcess(
             @Valid @ModelAttribute("brick") BrickDto brickDto,
             BindingResult bindingResult, Model model
-    )
-    {
-        long newId;
+        ) {
         if (!bindingResult.hasErrors()) {
-            newId = brickFacade.createBrick(brickDto);
-            return "redirect:" + newId;
+            brickFacade.createBrick(brickDto);
+            return "redirect:";
         }
         else {
             return "bricks/form";

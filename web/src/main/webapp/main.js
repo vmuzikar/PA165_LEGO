@@ -36,5 +36,8 @@ $(document).ready(function() {
     $('#amount').change(function(){
         setURL($(this));
     });
+    $('a.link-del').click(function(){
+        return confirm("Are you sure you want to delete this item?");
+    });
     initiateURL($('#amount'));
 } );
