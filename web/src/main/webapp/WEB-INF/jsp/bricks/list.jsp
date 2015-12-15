@@ -13,9 +13,10 @@
                href="<c:url value="/brick/unused" />" 
                class="btn btn-primary spaced mobile-full">Unused</a>
             <div class="input-group pull-right mobile-full">
-                <input type="text" class="form-control inline" id="amount" value="3">
+                <input type="number" class="form-control inline" id="amount" value="3" min="1" max="99">
                 <span class="input-group-btn">
-                    <a href="#" class="btn btn-primary">most used</a>
+                    <a href="<c:url value="/brick/most-used" />/3" 
+                       class="btn btn-primary amount-dependent">most used</a>
                 </span>
             </div>
         </div>

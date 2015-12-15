@@ -38,7 +38,7 @@ public class BrickController {
         return "bricks/list";
     }
     
-    @RequestMapping(value = Urls.UNUSED + "/{amount}", method = RequestMethod.GET)
+    @RequestMapping(value = Urls.MOST_USED + "/{amount}", method = RequestMethod.GET)
     public String getMostUsed(@PathVariable int amount, Model model) {
         model.addAttribute("bricks", brickFacade.getMostUsedBricks(amount));
         return "bricks/list";
