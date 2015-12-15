@@ -19,6 +19,12 @@ $(document).ready(function() {
         url = url.substr(0, url.lastIndexOf('/')+1) + value;
         target.attr('href', url);
     }
+    function initiateURL(o){
+        var url = window.location.href;
+        url = url.substr(url.lastIndexOf('/')+1);
+        o.val(url);
+        setURL(o);
+    }
     $('table#list').DataTable({
         columnDefs: [
             {
@@ -30,5 +36,5 @@ $(document).ready(function() {
     $('#amount').change(function(){
         setURL($(this));
     });
-    setURL($('#amount'));
+    initiateURL($('#amount'));
 } );

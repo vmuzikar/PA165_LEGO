@@ -1,5 +1,6 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <l:template title="Bricks">
     
     <div class="controls clearfix">
@@ -9,7 +10,8 @@
         </div>
         <div class="pull-right mobile-full">
             <a href="<c:url value="/brick" />"
-               class="btn btn-primary mobile-full">All</a><a 
+               class="btn btn-primary mobile-full<c:if 
+                   test="${fn:endsWith(pageContext.request.contextPath, '/brick')}"> disabled</c:if>">All</a><a 
                href="<c:url value="/brick/unused" />" 
                class="btn btn-primary spaced mobile-full">Unused</a>
             <div class="input-group pull-right mobile-full">
