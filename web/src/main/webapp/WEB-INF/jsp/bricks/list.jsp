@@ -3,19 +3,22 @@
 <l:template title="Bricks">
     
     <div class="controls clearfix">
-        <div class="pull-left">
-            <a href="<c:url value="/brick/create" />" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
+        <div class="pull-left mobile-full">
+            <a href="<c:url value="/brick/create" />" class="btn btn-primary mobile-full"><span 
+                    class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
         </div>
-        <div class="pull-right">
-            <div class="input-group">
+        <div class="pull-right mobile-full">
+            <a href="<c:url value="/brick" />"
+               class="btn btn-primary mobile-full">All</a><a 
+               href="<c:url value="/brick/unused" />" 
+               class="btn btn-primary spaced mobile-full">Unused</a>
+            <div class="input-group pull-right mobile-full">
+                <input type="text" class="form-control inline" id="amount" value="3">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary">Show</button>
+                    <a href="#" class="btn btn-primary">most used</a>
                 </span>
-                <input type="text" class="form-control inline" id="amount" placeholder="3">
-                <div class="input-group-addon">most used</div>
             </div>
         </div>
-        <a href="<c:url value="/brick/unused" />" class="btn btn-primary">Show unused</a>
     </div>
     
     <c:choose>
