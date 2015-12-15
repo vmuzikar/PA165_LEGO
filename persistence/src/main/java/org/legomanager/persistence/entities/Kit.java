@@ -60,6 +60,9 @@ public class Kit {
     }
 
     public void setCategory(Category category) {
+        if (this.category != null) {
+            this.category.removeKit(this);
+        }
         this.category = category;
         category.addKit(this);
     }

@@ -1,9 +1,12 @@
 package org.legomanager.persistence.dao;
 
 import org.legomanager.persistence.entities.Brick;
+import org.legomanager.persistence.entities.Kit;
 import org.springframework.stereotype.Repository;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * DAO for Brick
@@ -14,6 +17,15 @@ import javax.persistence.TypedQuery;
 public class BrickDaoImpl extends AbstractBaseDaoImpl<Brick> implements BrickDao {
     public BrickDaoImpl() {
         super(Brick.class);
+    }
+
+    @Override
+    public void delete(Brick entity) {
+        Set<Kit> kits = new HashSet<>(entity.getKits());
+        for (Kit kit : kits) {
+            kit.removeBrick(entity);
+        }
+        super.delete(entity);
     }
 
     @Override

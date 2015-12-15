@@ -19,7 +19,7 @@ public class Category implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
     
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     private java.util.Set<Kit> kits = new HashSet<Kit>();
 
     public long getId() {
@@ -44,6 +44,10 @@ public class Category implements Serializable {
 
     public void addKit(Kit kit) {
         this.kits.add(kit);
+    }
+
+    public void removeKit(Kit kit) {
+        this.kits.remove(kit);
     }
 
     @Override

@@ -62,8 +62,11 @@ public class BrickController {
         return "bricks/form";
     }
     
-    @RequestMapping(value = Urls.DELETE + "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}" + Urls.DELETE, method = RequestMethod.GET)
     public String delete(@PathVariable long id, Model model) {
+        if (brickFacade.getBrick(id) == null) {
+            throw new ResourceNotFoundException();
+        }
         brickFacade.removeBrick(id);
         return "redirect:/brick";
     }

@@ -52,7 +52,7 @@
                                     class="glyphicon glyphicon-folder-open" 
                                     aria-hidden="true"></span><span 
                                     class="sr-only">details</span></a> 
-                            <a href="<c:url value="/brick/delete/${brick.id}" />" class="link-del"><span 
+                            <a href="<c:url value="/brick/${brick.id}/delete" />" class="link-del"><span
                                     class="glyphicon glyphicon-trash" 
                                     aria-hidden="true"></span><span 
                                     class="sr-only">delete</span></a>         
