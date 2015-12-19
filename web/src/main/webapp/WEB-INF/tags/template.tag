@@ -1,6 +1,7 @@
 <%@ tag pageEncoding="utf-8" dynamic-attributes="dynattrs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="title" type="java.lang.String" required="false" %>
 <html>
 <head>
@@ -36,12 +37,13 @@
         <li><a href="<c:url value="/kit" />">Kits</a></li>
         <li><a href="<c:url value="/category" />">Categories</a></li>
       </ul>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-right" action="<c:url value="/logout" />" method="post" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Username">
-          <input type="text" class="form-control" placeholder="Password">
+            Logged in user:
+            <sec:authentication property="principal.username" />
         </div>
-        <button type="submit" class="btn btn-default">Login</button>
+        <button type="submit" class="btn btn-default">Logout</button>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       </form>
     </div>
   </div>

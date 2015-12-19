@@ -1,13 +1,16 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <l:template title="Bricks">
     
     <div class="controls clearfix">
-        <div class="pull-left mobile-full">
-            <a href="<c:url value="/brick/create" />" class="btn btn-primary mobile-full"><span 
-                    class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
-        </div>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="pull-left mobile-full">
+                <a href="<c:url value="/brick/create" />" class="btn btn-primary mobile-full"><span
+                        class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
+            </div>
+        </sec:authorize>
         <div class="pull-right mobile-full">
             <a href="<c:url value="/brick" />"
                class="btn btn-primary mobile-full<c:if 
@@ -51,11 +54,13 @@
                             <a href="<c:url value="/brick/${brick.id}" />"><span 
                                     class="glyphicon glyphicon-folder-open" 
                                     aria-hidden="true"></span><span 
-                                    class="sr-only">details</span></a> 
-                            <a href="<c:url value="/brick/${brick.id}/delete" />" class="link-del"><span
-                                    class="glyphicon glyphicon-trash" 
-                                    aria-hidden="true"></span><span 
-                                    class="sr-only">delete</span></a>         
+                                    class="sr-only">details</span></a>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <a href="<c:url value="/brick/${brick.id}/delete" />" class="link-del"><span
+                                        class="glyphicon glyphicon-trash"
+                                        aria-hidden="true"></span><span
+                                        class="sr-only">delete</span></a>
+                            </sec:authorize>
                         </td>
                     </tr>
                 </c:forEach>
