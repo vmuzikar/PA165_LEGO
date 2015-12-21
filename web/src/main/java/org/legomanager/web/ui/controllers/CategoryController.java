@@ -4,6 +4,7 @@ import org.legomanager.api.dto.CategoryDto;
 import org.legomanager.api.facade.CategoryFacade;
 import org.legomanager.web.Urls;
 import org.legomanager.web.ui.exceptions.ResourceNotFoundException;
+import org.legomanager.web.validators.CategoryValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ import javax.validation.Valid;
 public class CategoryController {
     @Autowired
     private CategoryFacade categoryFacade;
+
+    @Autowired
+    private CategoryValidator categoryValidator;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAll(Model model) {
@@ -68,6 +72,7 @@ public class CategoryController {
             BindingResult bindingResult, Model model
     )
     {
+        categoryValidator.validate(categoryDto, bindingResult);
         if (!bindingResult.hasErrors()) {
             categoryFacade.createCategory(categoryDto);
             return "redirect:";

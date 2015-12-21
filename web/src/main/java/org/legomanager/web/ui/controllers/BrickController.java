@@ -4,6 +4,7 @@ import org.legomanager.api.dto.BrickDto;
 import org.legomanager.api.facade.BrickFacade;
 import org.legomanager.web.Urls;
 import org.legomanager.web.ui.exceptions.ResourceNotFoundException;
+import org.legomanager.web.validators.BrickValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ import javax.validation.Valid;
 public class BrickController {
     @Autowired
     private BrickFacade brickFacade;
+
+    @Autowired
+    private BrickValidator brickValidator;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAll(Model model) {
@@ -76,6 +80,7 @@ public class BrickController {
             @Valid @ModelAttribute("brick") BrickDto brickDto,
             BindingResult bindingResult, Model model
         ) {
+        brickValidator.validate(brickDto, bindingResult);
         if (!bindingResult.hasErrors()) {
             brickFacade.createBrick(brickDto);
             return "redirect:";
