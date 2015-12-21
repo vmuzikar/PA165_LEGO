@@ -60,6 +60,15 @@ public class CategoryController {
         return "categories/detail";
     }
 
+    @RequestMapping(value = "/{id}" + Urls.DELETE, method = RequestMethod.GET)
+    public String delete(@PathVariable long id, Model model) {
+        if (categoryFacade.getCategory(id) == null) {
+            throw new ResourceNotFoundException();
+        }
+        categoryFacade.removeCategory(id);
+        return "redirect:/category";
+    }
+
     @RequestMapping(value = Urls.CREATE, method = RequestMethod.GET)
     public String create(Model model) {
         model.addAttribute("category", new CategoryDto());
@@ -75,6 +84,35 @@ public class CategoryController {
         categoryValidator.validate(categoryDto, bindingResult);
         if (!bindingResult.hasErrors()) {
             categoryFacade.createCategory(categoryDto);
+            return "redirect:";
+        }
+        else {
+            return "categories/form";
+        }
+    }
+
+    @RequestMapping(value = "/{id}" + Urls.EDIT, method = RequestMethod.GET)
+    public String edit(@PathVariable long id, Model model) {
+        CategoryDto categoryDto = categoryFacade.getCategory(id);
+        if (categoryDto == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        model.addAttribute("category", categoryDto);
+
+        return "categories/form";
+    }
+
+    @RequestMapping(value = "/{id}" + Urls.EDIT, method = RequestMethod.POST)
+    public String editProcess(
+            @PathVariable long id,
+            @Valid @ModelAttribute("category") CategoryDto categoryDto,
+            BindingResult bindingResult
+    ) {
+        categoryDto.setId(id);
+        categoryValidator.validate(categoryDto, bindingResult);
+        if (!bindingResult.hasErrors()) {
+            categoryFacade.editCategory(categoryDto);
             return "redirect:";
         }
         else {

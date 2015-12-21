@@ -1,6 +1,7 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <l:template title="Categories">
     
     <div class="controls clearfix">
@@ -34,18 +35,25 @@
                         <th> </th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th> </th>
-                    </tr>
-                </tfoot>
                 <tbody>
                 <c:forEach items="${categories}" var="category">
                     <tr>
                         <td><c:out value="${category.name}" /></td>
-                        <td><c:out value="${category.name}" /></td>
-                        <td class="right-align"><a href="<c:url value="/category/${category.id}" />" ><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><span class="sr-only">details</span></a></td>
+                        <td class="right-align"><a href="<c:url value="/category/${category.id}" />" >
+                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                            <span class="sr-only">details</span>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <a href="<c:url value="/category/${category.id}/edit" />"><span
+                                        class="glyphicon glyphicon-pencil"
+                                        aria-hidden="true"></span><span
+                                        class="sr-only">edit</span></a>
+
+                                <a href="<c:url value="/category/${category.id}/delete" />" class="link-del"><span
+                                        class="glyphicon glyphicon-trash"
+                                        aria-hidden="true"></span><span
+                                        class="sr-only">delete</span></a>
+                            </sec:authorize>
+                        </a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
