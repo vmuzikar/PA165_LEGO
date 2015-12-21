@@ -55,10 +55,11 @@ public class KitFacadeImpl implements org.legomanager.api.facade.KitFacade {
     }
 
     public KitDto getKit(long id) {
-        Kit kit = kitService.findById(id);
-        KitDto kitDto = mappingService.map(kit, KitDto.class);
-        kitDto.setCategoryId(kit.getCategory().getId());
-        return kitDto;
+        return mappingService.map(kitService.findById(id), KitDto.class);
+    }
+
+    public KitDto getKit(String name) {
+        return mappingService.map(kitService.findByName(name), KitDto.class);
     }
 
     public List<KitDto> getAllKits() {

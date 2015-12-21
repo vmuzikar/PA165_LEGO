@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface AbstractBaseDao<E> {
     E findById(long id);
+    E findByName(String name);
     void create(E entity);
     void delete(E entity);
     void update(E entity);

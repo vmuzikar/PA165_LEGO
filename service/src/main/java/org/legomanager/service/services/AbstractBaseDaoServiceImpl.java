@@ -37,6 +37,16 @@ public abstract class AbstractBaseDaoServiceImpl<E> implements AbstractBaseDaoSe
         }
     }
 
+    @Override
+    public E findByName(String name) {
+        try {
+            return getDao().findByName(name);
+        }
+        catch (Exception e) {
+            throw new DataRetrievalFailureException("There was an error on DAO layer");
+        }
+    }
+
     public List<E> findAll() {
         try {
             return getDao().findAll();

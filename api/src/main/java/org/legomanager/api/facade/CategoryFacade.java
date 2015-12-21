@@ -30,6 +30,8 @@ public interface CategoryFacade {
 
     CategoryDto getCategory(long id);
 
+    CategoryDto getCategory(String name);
+
     /**
      * Fetches all categories. 
      *

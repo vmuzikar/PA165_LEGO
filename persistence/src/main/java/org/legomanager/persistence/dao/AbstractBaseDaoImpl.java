@@ -1,6 +1,7 @@
 package org.legomanager.persistence.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -22,6 +23,19 @@ public abstract class AbstractBaseDaoImpl<E> implements AbstractBaseDao<E> {
     @Override
     public E findById(long id) {
         return em.find(entityClass, id);
+    }
+
+    @Override
+    public E findByName(String name) {
+        try {
+            return em.createQuery("select c from " + entityClass.getTypeName() + " c where c.name=:name", entityClass)
+                    .setParameter("name", name)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        }
+        catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override

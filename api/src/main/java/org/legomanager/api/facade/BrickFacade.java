@@ -29,6 +29,8 @@ public interface BrickFacade {
 
     BrickDto getBrick(long id);
 
+    BrickDto getBrick(String name);
+
     /**
      * Fetches all bricks. 
      *

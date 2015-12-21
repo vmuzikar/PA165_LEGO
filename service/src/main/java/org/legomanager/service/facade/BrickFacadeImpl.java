@@ -45,6 +45,10 @@ public class BrickFacadeImpl implements BrickFacade {
         return mappingService.map(brickService.findById(id), BrickDto.class);
     }
 
+    public BrickDto getBrick(String name) {
+        return mappingService.map(brickService.findByName(name), BrickDto.class);
+    }
+
     public List<BrickDto> getAllBricks() {
         return (List<BrickDto>) mappingService.map(brickService.findAll(), BrickDto.class);
     }

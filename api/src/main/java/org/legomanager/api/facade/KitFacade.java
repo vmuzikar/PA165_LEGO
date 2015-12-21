@@ -15,6 +15,7 @@ public interface KitFacade {
     void editKit(KitDto kitDto);
     void removeKit(long id);
     KitDto getKit(long id);
+    KitDto getKit(String name);
     List<KitDto> getAllKits();
     List<KitDto> getKitsForKids();
     List<KitDto> getKitsForTeenage();

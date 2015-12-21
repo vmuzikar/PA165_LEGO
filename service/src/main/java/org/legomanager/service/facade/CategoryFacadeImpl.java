@@ -46,6 +46,10 @@ public class CategoryFacadeImpl implements CategoryFacade {
         return mappingService.map(categoryService.findById(id), CategoryDto.class);
     }
 
+    public CategoryDto getCategory(String name) {
+        return mappingService.map(categoryService.findByName(name), CategoryDto.class);
+    }
+
     public List<CategoryDto> getAllCategories() {
         return (List<CategoryDto>) mappingService.map(categoryService.findAll(), CategoryDto.class);
     }
