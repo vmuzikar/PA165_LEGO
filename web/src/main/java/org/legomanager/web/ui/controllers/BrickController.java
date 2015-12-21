@@ -59,12 +59,6 @@ public class BrickController {
 
         return "bricks/detail";
     }
-
-    @RequestMapping(value = Urls.CREATE, method = RequestMethod.GET)
-    public String create(Model model) {
-        model.addAttribute("brick", new BrickDto());
-        return "bricks/form";
-    }
     
     @RequestMapping(value = "/{id}" + Urls.DELETE, method = RequestMethod.GET)
     public String delete(@PathVariable long id, Model model) {
@@ -75,14 +69,50 @@ public class BrickController {
         return "redirect:/brick";
     }
 
+    @RequestMapping(value = Urls.CREATE, method = RequestMethod.GET)
+    public String create(Model model) {
+        model.addAttribute("brick", new BrickDto());
+        model.addAttribute("create", true);
+        return "bricks/form";
+    }
+
     @RequestMapping(value = Urls.CREATE, method = RequestMethod.POST)
     public String createProcess(
-            @Valid @ModelAttribute("brick") BrickDto brickDto,
-            BindingResult bindingResult, Model model
-        ) {
+        @Valid @ModelAttribute("brick") BrickDto brickDto,
+        BindingResult bindingResult
+    ) {
         brickValidator.validate(brickDto, bindingResult);
         if (!bindingResult.hasErrors()) {
             brickFacade.createBrick(brickDto);
+            return "redirect:";
+        }
+        else {
+            return "bricks/form";
+        }
+    }
+
+    @RequestMapping(value = "/{id}" + Urls.EDIT, method = RequestMethod.GET)
+    public String edit(@PathVariable long id, Model model) {
+        BrickDto brickDto = brickFacade.getBrick(id);
+        if (brickDto == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        model.addAttribute("brick", brickDto);
+
+        return "bricks/form";
+    }
+
+    @RequestMapping(value = "/{id}" + Urls.EDIT, method = RequestMethod.POST)
+    public String editProcess(
+            @PathVariable long id,
+            @Valid @ModelAttribute("brick") BrickDto brickDto,
+            BindingResult bindingResult
+    ) {
+        brickDto.setId(id);
+        brickValidator.validate(brickDto, bindingResult);
+        if (!bindingResult.hasErrors()) {
+            brickFacade.editBrick(brickDto);
             return "redirect:";
         }
         else {

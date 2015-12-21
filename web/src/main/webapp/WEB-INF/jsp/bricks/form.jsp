@@ -1,7 +1,7 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<l:template title="Add brick">
+<l:template title="${create ? 'Create' : 'Edit'} brick">
 
     <form:form method="post" modelAttribute="brick">
         <table class="table">

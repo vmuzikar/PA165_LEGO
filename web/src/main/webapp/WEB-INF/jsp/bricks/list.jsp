@@ -56,6 +56,11 @@
                                     aria-hidden="true"></span><span 
                                     class="sr-only">details</span></a>
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <a href="<c:url value="/brick/${brick.id}/edit" />"><span
+                                        class="glyphicon glyphicon-pencil"
+                                        aria-hidden="true"></span><span
+                                        class="sr-only">edit</span></a>
+
                                 <a href="<c:url value="/brick/${brick.id}/delete" />" class="link-del"><span
                                         class="glyphicon glyphicon-trash"
                                         aria-hidden="true"></span><span

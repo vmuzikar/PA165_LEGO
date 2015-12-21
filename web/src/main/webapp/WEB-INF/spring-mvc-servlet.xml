@@ -58,8 +58,7 @@
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <security:form-login
             login-page="/login"
-            default-target-url="/brick"
-            always-use-default-target="true"
+            default-target-url="/"
             authentication-failure-url="/login?error"
             username-parameter="user"
             password-parameter="pass"
