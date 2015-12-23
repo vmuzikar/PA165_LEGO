@@ -5,12 +5,14 @@
 <l:template title="Categories">
     
     <div class="controls clearfix">
-        <div class="pull-left mobile-full">
-            <a href="<c:url value="/category/create" />" class="btn btn-primary mobile-full"><span 
-                    class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
-            <a href="<c:url value="/category/merge" />" class="btn btn-primary mobile-full"><span
-                    class="glyphicon glyphicon-link" aria-hidden="true"></span> Merge</a>
-        </div>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="pull-left mobile-full">
+                <a href="<c:url value="/category/create" />" class="btn btn-primary mobile-full"><span
+                        class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
+                <a href="<c:url value="/category/merge" />" class="btn btn-primary mobile-full"><span
+                        class="glyphicon glyphicon-link" aria-hidden="true"></span> Merge</a>
+            </div>
+        </sec:authorize>
         <div class="pull-right mobile-full">
             <a href="<c:url value="/category" />"
                class="btn btn-primary mobile-full<c:if 
