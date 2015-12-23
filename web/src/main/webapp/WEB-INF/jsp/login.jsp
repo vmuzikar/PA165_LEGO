@@ -39,8 +39,6 @@
 
 <body>
 
-<h1>Login</h1>
-
 <div id="login-box">
 
     <c:if test="${param.error ne null}">

@@ -38,7 +38,7 @@
         <li><a href="<c:url value="/category" />">Categories</a></li>
       </ul>
       <form class="navbar-form navbar-right" action="<c:url value="/logout" />" method="post" role="search">
-        <div class="form-group">
+        <div class="form-group" style="color: white;">
             Logged in user:
             <sec:authentication property="principal.username" />
         </div>
