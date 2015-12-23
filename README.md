@@ -1,4 +1,8 @@
 # PA165_LEGO
+
+REST
+-----
+
 You can access the REST API by default at http://localhost:8080/pa165/rest/v1/.
 
 The API for Brick is at http://localhost:8080/pa165/rest/v1/brick.
