@@ -4,7 +4,9 @@ import org.dozer.Mapper;
 import org.legomanager.api.dto.BrickDto;
 import org.legomanager.api.dto.CategoryDto;
 import org.legomanager.api.dto.KitDto;
+import org.legomanager.api.exceptions.ServiceException;
 import org.legomanager.persistence.entities.Brick;
+import org.legomanager.persistence.entities.Category;
 import org.legomanager.persistence.entities.Kit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,9 +70,17 @@ public class BeanMappingServiceImpl implements BeanMappingService {
     private void kitDtoToKit(KitDto kitDto, Kit kit) {
         kit.removeAllBricks();
         for (Long brickId : kitDto.getBricksIds()) {
-            kit.addBrick(brickService.findById(brickId));
+            Brick brick = brickService.findById(brickId);
+            if (brick == null) {
+                throw new ServiceException("Cannot convert id to Brick - not found!");
+            }
+            kit.addBrick(brick);
         }
 
-        kit.setCategory(categoryService.findById(kitDto.getCategoryId()));
+        Category category = categoryService.findById(kitDto.getCategoryId());
+        if (category == null) {
+            throw new ServiceException("Cannot convert id to Category - not found!");
+        }
+        kit.setCategory(category);
     }
 }

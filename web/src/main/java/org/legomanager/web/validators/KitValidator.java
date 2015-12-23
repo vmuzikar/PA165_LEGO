@@ -25,12 +25,16 @@ public class KitValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         KitDto kitDto = (KitDto) o;
-        if (kitDto.getName() == null) {
-            return;
+
+        if (kitDto.getMinAge() >= kitDto.getMaxAge()) {
+            errors.rejectValue("maxAge", "maxAge.notvalid", "Minimal age must be greater than maximal age");
         }
-        KitDto kitDtoFound = kitFacade.getKit(kitDto.getName());
-        if (kitDtoFound != null && kitDtoFound.getId() != kitDto.getId()) {
-            errors.rejectValue("name", "name.notvalid", "Name must be unique");
+
+        if (kitDto.getName() != null) {
+            KitDto kitDtoFound = kitFacade.getKit(kitDto.getName());
+            if (kitDtoFound != null && kitDtoFound.getId() != kitDto.getId()) {
+                errors.rejectValue("name", "name.notvalid", "Name must be unique");
+            }
         }
     }
 }

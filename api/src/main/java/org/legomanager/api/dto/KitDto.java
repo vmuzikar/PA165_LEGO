@@ -24,7 +24,7 @@ public class KitDto {
     @NotBlank(message = "Name must be filled.")
     private String name;
 
-    @NotNull(message = "Must be selected")
+    @NotNull(message = "Category must be selected")
     private Long categoryId;
 
     /**
@@ -32,7 +32,7 @@ public class KitDto {
      */
     private CategoryDto categoryDto;
 
-    @NotEmpty(message = "Must be selected")
+    @NotEmpty(message = "At least one brick must be selected")
     private Set<Long> bricksIds = new HashSet<Long>();
 
     /**
@@ -42,16 +42,16 @@ public class KitDto {
     
     @Digits(integer = 9, fraction = 2, message = "Price must have at most two fraction digits and nine digits.")
     @DecimalMin(value = "0.00", message = "Price can't be negative.")
+    @NotNull(message = "Price must be filled")
     private BigDecimal price;
 
-    @NotNull(message = "Must be selected")
+    @NotNull(message = "Currency must be selected")
     private Currency currency;
     
     @Min(value = 0, message = "Minimal age must be at least 0.")
     private short minAge;
     
     @Min(value = 0, message = "Maximal age must be at least 0.")
-    @Max(value = 99, message = "Maximal age must be at most 99.")
     private short maxAge;
 
     public long getId() {
