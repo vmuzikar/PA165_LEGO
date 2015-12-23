@@ -80,6 +80,7 @@ public class CategoryController {
     @RequestMapping(value = Urls.CREATE, method = RequestMethod.GET)
     public String create(Model model) {
         model.addAttribute("category", new CategoryDto());
+        model.addAttribute("create", true);
         return "categories/form";
     }
 
