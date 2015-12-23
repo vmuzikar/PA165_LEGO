@@ -10,6 +10,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Representation of a kit
@@ -22,15 +23,28 @@ public class KitDto {
     @NotNull(message = "Name must be filled.")
     @NotBlank(message = "Name must be filled.")
     private String name;
-    
+
+    @NotNull(message = "Must be selected")
     private Long categoryId;
-    
+
+    /**
+     * Not used for write operations, i.e. it's only for passing the data FROM database
+     */
+    private CategoryDto categoryDto;
+
+    @NotEmpty(message = "Must be selected")
     private Set<Long> bricksIds = new HashSet<Long>();
+
+    /**
+     * Not used for write operations, i.e. it's only for passing the data FROM database
+     */
+    private Set<BrickDto> bricksDtos;
     
     @Digits(integer = 9, fraction = 2, message = "Price must have at most two fraction digits and nine digits.")
     @DecimalMin(value = "0.00", message = "Price can't be negative.")
     private BigDecimal price;
-    
+
+    @NotNull(message = "Must be selected")
     private Currency currency;
     
     @Min(value = 0, message = "Minimal age must be at least 0.")
@@ -64,12 +78,28 @@ public class KitDto {
         this.categoryId = categoryId;
     }
 
+    public CategoryDto getCategoryDto() {
+        return categoryDto;
+    }
+
+    public void setCategoryDto(CategoryDto categoryDto) {
+        this.categoryDto = categoryDto;
+    }
+
     public Set<Long> getBricksIds() {
         return bricksIds;
     }
 
     public void setBricksIds(Set<Long> bricksIds) {
         this.bricksIds = bricksIds;
+    }
+
+    public Set<BrickDto> getBricksDtos() {
+        return bricksDtos;
+    }
+
+    public void setBricksDtos(Set<BrickDto> bricksDtos) {
+        this.bricksDtos = bricksDtos;
     }
 
     public BigDecimal getPrice() {

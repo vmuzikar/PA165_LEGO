@@ -1,16 +1,15 @@
 package org.legomanager.service.services;
 
 import org.dozer.Mapper;
+import org.legomanager.api.dto.BrickDto;
+import org.legomanager.api.dto.CategoryDto;
 import org.legomanager.api.dto.KitDto;
 import org.legomanager.persistence.entities.Brick;
 import org.legomanager.persistence.entities.Kit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Service for bean mapping (i.e. conversion between an entity and a DTO)
@@ -56,11 +55,14 @@ public class BeanMappingServiceImpl implements BeanMappingService {
 
     private void kitToKitDto(Kit kit, KitDto kitDto) {
         kitDto.setBricksIds(new HashSet<>());
+        kitDto.setBricksDtos(new HashSet<>());
         for (Brick brick : kit.getBricks()) {
             kitDto.getBricksIds().add(brick.getId());
+            kitDto.getBricksDtos().add(mapper.map(brick, BrickDto.class));
         }
 
         kitDto.setCategoryId(kit.getCategory().getId());
+        kitDto.setCategoryDto(mapper.map(kit.getCategory(), CategoryDto.class));
     }
 
     private void kitDtoToKit(KitDto kitDto, Kit kit) {
