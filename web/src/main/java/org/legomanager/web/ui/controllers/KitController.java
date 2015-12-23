@@ -3,16 +3,20 @@ package org.legomanager.web.ui.controllers;
 import org.legomanager.api.dto.BrickDto;
 import org.legomanager.api.dto.CategoryDto;
 import org.legomanager.api.dto.KitDto;
+import org.legomanager.api.exceptions.ServiceException;
 import org.legomanager.api.facade.BrickFacade;
 import org.legomanager.api.facade.CategoryFacade;
 import org.legomanager.api.facade.KitFacade;
+import org.legomanager.api.representantions.ModelRepresentation;
 import org.legomanager.web.Urls;
 import org.legomanager.web.ui.exceptions.ResourceNotFoundException;
 import org.legomanager.web.validators.KitValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -136,6 +140,36 @@ public class KitController {
         }
         else {
             return "kits/form";
+        }
+    }
+
+    @RequestMapping(value = Urls.CONVERTER, method = RequestMethod.GET)
+    public String modelKitConvert(Model model) {
+        model.addAttribute("model", new ModelRepresentation());
+        return "kits/converter";
+    }
+
+    @RequestMapping(value = Urls.CONVERTER, method = RequestMethod.POST)
+    public String modelKitConvertProcess(
+            @Valid @ModelAttribute("model") ModelRepresentation modelRepresentation,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        if (!bindingResult.hasErrors()) {
+            KitDto kitDto = new KitDto();
+            try {
+                kitDto = kitFacade.createKitFromModel(modelRepresentation, kitDto);
+            }
+            catch (ServiceException e) {
+                bindingResult.rejectValue(null, "model.notvalid", "Cannot find any suitable bricks");
+                return "kits/converter";
+            }
+            model.addAttribute("create", true);
+            model.addAttribute("kit", kitDto);
+            return "kits/form";
+        }
+        else {
+            return "kits/converter";
         }
     }
 

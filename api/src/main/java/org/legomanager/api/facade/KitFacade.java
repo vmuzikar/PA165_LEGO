@@ -27,5 +27,7 @@ public interface KitFacade {
      * @param model a 3D model representation
      * @param kit a Kit with predefined values (name, cost, ...)
      */
-    public void importModel(ModelRepresentation model, KitDto kit);
+    void importModel(ModelRepresentation model, KitDto kit);
+
+    KitDto createKitFromModel(ModelRepresentation model, KitDto kit);
 }

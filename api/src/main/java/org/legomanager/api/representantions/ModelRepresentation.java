@@ -1,5 +1,7 @@
 package org.legomanager.api.representantions;
 
+import javax.validation.constraints.Min;
+
 /**
  * Representation of a 3D model
  * This model can be imported to LEGO manager and transformed to a LEGO kit
@@ -12,17 +14,22 @@ public class ModelRepresentation {
     /**
      * In millimeters
      */
+    @Min(value = 1, message = "Width must be at least 1")
     private int width;
 
     /**
      * In millimeters
      */
+    @Min(value = 1, message = "Width must be at least 1")
     private int height;
 
     /**
      * In millimeters
      */
+    @Min(value = 1, message = "Width must be at least 1")
     private int depth;
+
+    public ModelRepresentation() {}
 
     public ModelRepresentation(int width, int height, int depth) {
         setWidth(width);
@@ -35,9 +42,6 @@ public class ModelRepresentation {
     }
 
     public void setWidth(int width) {
-        if (width <= 0) {
-            throw new IllegalArgumentException("Width must be greater than zero");
-        }
         this.width = width;
     }
 
@@ -46,9 +50,6 @@ public class ModelRepresentation {
     }
 
     public void setHeight(int height) {
-        if (height <= 0) {
-            throw new IllegalArgumentException("Height must be greater than zero");
-        }
         this.height = height;
     }
 
@@ -57,9 +58,6 @@ public class ModelRepresentation {
     }
 
     public void setDepth(int depth) {
-        if (depth <= 0) {
-            throw new IllegalArgumentException("Depth must be greater than zero");
-        }
         this.depth = depth;
     }
 }

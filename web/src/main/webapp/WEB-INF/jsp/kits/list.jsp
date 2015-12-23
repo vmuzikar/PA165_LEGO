@@ -9,6 +9,8 @@
             <div class="pull-left mobile-full">
                 <a href="<c:url value="/kit/create" />" class="btn btn-primary mobile-full"><span
                         class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
+                <a href="<c:url value="/kit/converter" />" class="btn btn-primary mobile-full"><span
+                        class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create from 3D model</a>
             </div>
         </sec:authorize>
         <div class="pull-right mobile-full">

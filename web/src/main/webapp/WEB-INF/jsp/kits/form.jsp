@@ -3,7 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <l:template title="${create ? 'Create' : 'Edit'} kit">
 
-    <form:form method="post" modelAttribute="kit">
+    <c:if test="${create}"><c:url value="/kit/create" var="action" /></c:if>
+    <form:form method="post" modelAttribute="kit" action="${action}">
         <table class="table">
             <tr>
                 <td><label for="name">Name:</label></td>

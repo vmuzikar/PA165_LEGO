@@ -56,31 +56,40 @@ public class BeanMappingServiceImpl implements BeanMappingService {
     }
 
     private void kitToKitDto(Kit kit, KitDto kitDto) {
-        kitDto.setBricksIds(new HashSet<>());
-        kitDto.setBricksDtos(new HashSet<>());
-        for (Brick brick : kit.getBricks()) {
-            kitDto.getBricksIds().add(brick.getId());
-            kitDto.getBricksDtos().add(mapper.map(brick, BrickDto.class));
+        if (kit.getBricks() != null) {
+            kitDto.setBricksIds(new HashSet<>());
+            kitDto.setBricksDtos(new HashSet<>());
+            for (Brick brick : kit.getBricks()) {
+                kitDto.getBricksIds().add(brick.getId());
+                kitDto.getBricksDtos().add(mapper.map(brick, BrickDto.class));
+            }
         }
 
-        kitDto.setCategoryId(kit.getCategory().getId());
-        kitDto.setCategoryDto(mapper.map(kit.getCategory(), CategoryDto.class));
+        if (kit.getCategory() != null) {
+            kitDto.setCategoryId(kit.getCategory().getId());
+            kitDto.setCategoryDto(mapper.map(kit.getCategory(), CategoryDto.class));
+        }
     }
 
     private void kitDtoToKit(KitDto kitDto, Kit kit) {
         kit.removeAllBricks();
-        for (Long brickId : kitDto.getBricksIds()) {
-            Brick brick = brickService.findById(brickId);
-            if (brick == null) {
-                throw new ServiceException("Cannot convert id to Brick - not found!");
+
+        if (kitDto.getBricksIds() != null) {
+            for (Long brickId : kitDto.getBricksIds()) {
+                Brick brick = brickService.findById(brickId);
+                if (brick == null) {
+                    throw new ServiceException("Cannot convert id to Brick - not found!");
+                }
+                kit.addBrick(brick);
             }
-            kit.addBrick(brick);
         }
 
-        Category category = categoryService.findById(kitDto.getCategoryId());
-        if (category == null) {
-            throw new ServiceException("Cannot convert id to Category - not found!");
+        if (kitDto.getCategoryId() != null) {
+            Category category = categoryService.findById(kitDto.getCategoryId());
+            if (category == null) {
+                throw new ServiceException("Cannot convert id to Category - not found!");
+            }
+            kit.setCategory(category);
         }
-        kit.setCategory(category);
     }
 }

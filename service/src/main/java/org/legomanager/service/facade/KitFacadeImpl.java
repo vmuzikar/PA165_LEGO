@@ -75,6 +75,14 @@ public class KitFacadeImpl implements org.legomanager.api.facade.KitFacade {
     }
 
     public void importModel(ModelRepresentation model, KitDto kitDto) {
+        kitService.create(createKitEntityFromModel(model, kitDto));
+    }
+
+    public KitDto createKitFromModel(ModelRepresentation model, KitDto kitDto) {
+        return mappingService.map(createKitEntityFromModel(model, kitDto), KitDto.class);
+    }
+
+    private Kit createKitEntityFromModel(ModelRepresentation model, KitDto kitDto) {
         Kit convertedKit = modelKitConverterService.convertModelToKit(model);
         Kit kit = mappingService.map(kitDto, Kit.class);
 
@@ -82,6 +90,6 @@ public class KitFacadeImpl implements org.legomanager.api.facade.KitFacade {
             kit.addBrick(brick);
         }
 
-        kitService.create(kit);
+        return kit;
     }
 }
