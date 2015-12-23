@@ -8,6 +8,7 @@ import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.legomanager.persistence.dao.AbstractBaseDao;
@@ -48,7 +49,8 @@ public class CategoryServiceImpl extends AbstractBaseDaoServiceImpl<Category> im
         }
 
         for (Category c : with){
-            for (Kit k : c.getKits()){
+            Set<Kit> kits = new HashSet<>(c.getKits());
+            for (Kit k : kits){
                 if (!k.getCategory().equals(result)) {
                     k.setCategory(result);
                     kitService.update(k);

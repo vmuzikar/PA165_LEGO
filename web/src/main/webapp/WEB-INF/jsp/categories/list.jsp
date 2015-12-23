@@ -8,6 +8,8 @@
         <div class="pull-left mobile-full">
             <a href="<c:url value="/category/create" />" class="btn btn-primary mobile-full"><span 
                     class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create</a>
+            <a href="<c:url value="/category/merge" />" class="btn btn-primary mobile-full"><span
+                    class="glyphicon glyphicon-link" aria-hidden="true"></span> Merge</a>
         </div>
         <div class="pull-right mobile-full">
             <a href="<c:url value="/category" />"
