@@ -52,6 +52,7 @@
 
     <security:http>
         <security:intercept-url pattern="/login" access="permitAll" />
+        <security:intercept-url pattern="/rest/**" access="permitAll" />
         <security:intercept-url pattern="/**/create" access="hasRole('ROLE_ADMIN')" />
         <security:intercept-url pattern="/**/delete" access="hasRole('ROLE_ADMIN')" />
         <security:intercept-url pattern="/**/edit" access="hasRole('ROLE_ADMIN')" />
