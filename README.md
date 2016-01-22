@@ -13,3 +13,9 @@ Supported operations:
 * `GET brick/{id}` gets details of a brick
 * `DELETE brick/{id}` deletes a brick
 * `PUT brick/{id}` updates a brick (consumes JSON as the create operation)
+
+
+WEB
+-----
+
+Default usernames/passwords: `admin/admin1` and `user/user1`
