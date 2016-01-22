@@ -22,7 +22,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
  * @author Vaclav Muzikar <vaclav@muzikari.cz>
  */
 @RestController
-@RequestMapping(Urls.REST_ROOT + Urls.BRICK)
+@RequestMapping(value = Urls.REST_ROOT + Urls.BRICK, produces = MediaType.APPLICATION_JSON_VALUE)
 public class BrickRestController {
     @Autowired
     private BrickFacade brickFacade;
@@ -34,7 +34,7 @@ public class BrickRestController {
      * Gets all Bricks
      * @return all bricks
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public HttpEntity<Resources<BrickResource>> getAll() {
         List<BrickDto> bricksDtos = brickFacade.getAllBricks();
 
