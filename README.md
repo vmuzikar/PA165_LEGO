@@ -29,13 +29,13 @@ curl -i http://localhost:8080/pa165/rest/v1/brick/1
 ```
 
 ###### Delete one brick
-`DELETE brick/{id}` deletes a brick
+`DELETE brick/{id}` deletes a brick, e.g.:
 ```
 curl -i -X DELETE http://localhost:8080/pa165/rest/v1/brick/1
 ```
 
 ###### Edit a brick
-`PUT brick/{id}` updates a brick (consumes JSON as the create operation)
+`PUT brick/{id}` updates a brick (consumes JSON as the create operation), e.g.:
 ```
 curl -i -X PUT -H "Content-Type: application/json" --data '{"name": "Edited Brick", "width": 8, "height": 10}' http://localhost:8080/pa165/rest/v1/brick/1
 ```
